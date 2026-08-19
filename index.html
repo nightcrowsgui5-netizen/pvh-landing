@@ -352,7 +352,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:44px;line-height:.6;color:#d9c191;">&ldquo;</div>
           <p style="font-size:15px;color:#4a5157;margin-top:16px;font-style:italic;">{{ d.texto }}</p>
           <div style="display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid #eceff0;">
-            <div style="width:52px;height:52px;border-radius:50%;flex-shrink:0;background:repeating-linear-gradient(135deg,#e3e8e9 0,#e3e8e9 8px,#eef1f1 8px,#eef1f1 16px);"></div>
+            <img src="{{ d.foto }}" alt="{{ d.nome }}" loading="lazy" decoding="async" style="width:52px;height:52px;border-radius:50%;flex-shrink:0;object-fit:cover;display:block;">
             <div>
               <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14.5px;color:#14454f;">{{ d.nome }}</div>
               <div style="font-size:12.5px;color:#8a9297;">{{ d.empresa }}</div>
@@ -565,6 +565,8 @@ class Component extends DCLogic {
     { nome:'CARGONORTE', thumb:'imagens/photo-1734279135113-8bd58bc02b69.jpg' },
     { nome:'INFRARAIL',  thumb:'imagens/photo-1431620828042-54af7f3a9e28.jpg' }
   ];
+
+  depoFotos = ['imagens/depo-carlos.jpg','imagens/depo-renata.jpg','imagens/depo-eduardo.jpg'];
 
   catKeys = ['all','ferrovia','pontes','viadutos','patios','especiais'];
 
@@ -888,7 +890,7 @@ class Component extends DCLogic {
       projetos,
       timeline: d.time,
       clientesLoop: [...this.clientesData, ...this.clientesData],
-      depoimentos: d.depo,
+      depoimentos: d.depo.map((x, i) => ({ ...x, foto: this.depoFotos[i] })),
       equipe,
       processo: d.proc,
       menuClass: this.state.menuOpen ? 'open' : '',
