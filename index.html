@@ -51,9 +51,11 @@
   }
 
   /* ===================== EQUIPA (cards) ===================== */
-  .team-card{position:relative;border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(15,53,61,.08);}
+  .team-card{position:relative;border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(15,53,61,.08);transition:transform .4s ease,box-shadow .4s ease;}
+  .team-card:hover{transform:translateY(-10px);box-shadow:0 28px 54px rgba(15,53,61,.20);}
   .team-imgwrap{position:relative;aspect-ratio:1/1.08;overflow:hidden;}
-  .team-imgwrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .team-imgwrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+  .team-card:hover .team-imgwrap img{transform:scale(1.06);}
   .team-social{position:absolute;top:0;left:0;display:flex;flex-direction:column;transform:translateX(-110%);transition:transform .35s ease;z-index:2;}
   .team-social a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;color:#fff;background:#243676;transition:background .25s;}
   .team-social a:hover{background:#1a295e;}
@@ -369,8 +371,8 @@
       <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.teamEyebrow }}</span>
       <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.16;color:#14454f;margin-top:16px;">{{ t.teamTitle }}</h2>
     </div>
-    <div class="rcol-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:26px;">
-      <sc-for list="{{ equipe }}" as="m" hint-placeholder-count="4">
+    <div class="rcol-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:960px;margin:0 auto;">
+      <sc-for list="{{ equipe }}" as="m" hint-placeholder-count="3">
         <div class="team-card {{ m.cardClass }}">
           <div class="team-imgwrap">
             <img src="{{ m.img }}" alt="{{ m.nome }}" loading="lazy" decoding="async">
@@ -436,7 +438,7 @@
           <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:20px;color:#14454f;">{{ t.formTitle }}</h3>
           <div style="display:flex;flex-direction:column;gap:18px;margin-top:24px;">
             <label style="display:block;"><span style="font-size:12px;font-weight:600;letter-spacing:.04em;color:#5a6167;">{{ t.fName }}</span><input value="{{ f_nome }}" onInput="{{ onNome }}" style="width:100%;margin-top:7px;padding:13px 14px;border:1px solid #d7dcdd;border-radius:2px;font-size:14.5px;outline:none;" style-focus="border-color:#14454f;" placeholder="{{ t.fNamePh }}"><span style="font-size:11.5px;color:#c0392b;">{{ e_nome }}</span></label>
-            <div class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="display:grid;grid-template-columns:1fr;gap:18px;">
               <label style="display:block;"><span style="font-size:12px;font-weight:600;letter-spacing:.04em;color:#5a6167;">{{ t.fEmail }}</span><input value="{{ f_email }}" onInput="{{ onEmail }}" style="width:100%;margin-top:7px;padding:13px 14px;border:1px solid #d7dcdd;border-radius:2px;font-size:14.5px;outline:none;" style-focus="border-color:#14454f;" placeholder="{{ t.fEmailPh }}"><span style="font-size:11.5px;color:#c0392b;">{{ e_email }}</span></label>
               <label style="display:block;"><span style="font-size:12px;font-weight:600;letter-spacing:.04em;color:#5a6167;">{{ t.fPhone }}</span><div style="display:flex;gap:8px;margin-top:7px;"><select value="{{ f_dial }}" onChange="{{ onDial }}" style="padding:13px 8px;border:1px solid #d7dcdd;border-radius:2px;font-size:14px;background:#fff;outline:none;cursor:pointer;" style-focus="border-color:#243676;"><option value="+351">🇵🇹 +351</option><option value="+55">🇧🇷 +55</option><option value="+34">🇪🇸 +34</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+39">🇮🇹 +39</option><option value="+1">🇺🇸 +1</option><option value="+244">🇦🇴 +244</option><option value="+258">🇲🇿 +258</option></select><input value="{{ f_telefone }}" onInput="{{ onTelefone }}" style="flex:1;min-width:0;padding:13px 14px;border:1px solid #d7dcdd;border-radius:2px;font-size:14.5px;outline:none;" style-focus="border-color:#243676;" placeholder="{{ t.fPhonePh }}"></div></label>
             </div>
@@ -579,7 +581,6 @@ class Component extends DCLogic {
 
   teamMeta = [
     { nome:'Eng. António Braga', photoId:'photo-1507003211169-0a1dd7228f2d' },
-    { nome:'Eng.ª Marina Costa', photoId:'photo-1573496359142-b8d87734a5a2' },
     { nome:'Eng. Paulo Ferreira', photoId:'photo-1500648767791-00dcc994a43e' },
     { nome:'Eng.ª Juliana Reis', photoId:'photo-1544005313-94ddf0286df2' }
   ];
@@ -642,8 +643,8 @@ class Component extends DCLogic {
         {texto:'Uma consultoria que combina engenharia pesada com uma gestão de obra impecável. Parceria de longo prazo.',nome:'Renata Prado',empresa:'Gestora de Infraestruturas · ViaCargo'},
         {texto:'O domínio de BIM e a supervisão em obra elevaram muito a qualidade da entrega do nosso terminal multimodal.',nome:'Eduardo Lima',empresa:'Diretor-Geral · PortoVia'}
       ],
-      teamRole:['Diretor Técnico','Gestora de Projetos','Coord. de Obras','Coord. de BIM'],
-      teamSpec:['Via Permanente','Estruturas & Pontes','Geotecnia','Projetos de Execução'],
+      teamRole:['Diretor Técnico','Coord. de Obras','Coord. de BIM'],
+      teamSpec:['Via Permanente','Geotecnia','Projetos de Execução'],
       proc:[
         {num:'1',titulo:'Contacto',desc:'Entendimento inicial da necessidade.'},
         {num:'2',titulo:'Estudo',desc:'Diagnóstico e viabilidade técnica.'},
@@ -709,8 +710,8 @@ class Component extends DCLogic {
         {texto:'A consultancy that combines heavy engineering with impeccable works management. A long-term partnership.',nome:'Renata Prado',empresa:'Infrastructure Manager · ViaCargo'},
         {texto:'Their BIM expertise and on-site supervision greatly raised the delivery quality of our multimodal terminal.',nome:'Eduardo Lima',empresa:'General Manager · PortoVia'}
       ],
-      teamRole:['Technical Director','Project Manager','Works Coordinator','BIM Coordinator'],
-      teamSpec:['Permanent Way','Structures & Bridges','Geotechnics','Detailed Design'],
+      teamRole:['Technical Director','Works Coordinator','BIM Coordinator'],
+      teamSpec:['Permanent Way','Geotechnics','Detailed Design'],
       proc:[
         {num:'1',titulo:'Contact',desc:'Initial understanding of the need.'},
         {num:'2',titulo:'Study',desc:'Diagnosis and technical feasibility.'},
@@ -776,8 +777,8 @@ class Component extends DCLogic {
         {texto:'Una consultoría que combina ingeniería pesada con una gestión de obra impecable. Una asociación a largo plazo.',nome:'Renata Prado',empresa:'Gerente de Infraestructuras · ViaCargo'},
         {texto:'El dominio de BIM y la supervisión en obra elevaron mucho la calidad de entrega de nuestra terminal multimodal.',nome:'Eduardo Lima',empresa:'Director General · PortoVia'}
       ],
-      teamRole:['Director Técnico','Gerente de Proyectos','Coord. de Obras','Coord. de BIM'],
-      teamSpec:['Vía Permanente','Estructuras y Puentes','Geotecnia','Proyectos de Ejecución'],
+      teamRole:['Director Técnico','Coord. de Obras','Coord. de BIM'],
+      teamSpec:['Vía Permanente','Geotecnia','Proyectos de Ejecución'],
       proc:[
         {num:'1',titulo:'Contacto',desc:'Comprensión inicial de la necesidad.'},
         {num:'2',titulo:'Estudio',desc:'Diagnóstico y viabilidad técnica.'},
@@ -864,7 +865,7 @@ class Component extends DCLogic {
     const projetos = this.state.filter === 'all' ? projAll : projAll.filter(p => p.catKey === this.state.filter);
     const SV = ['photo-1431620828042-54af7f3a9e28','photo-1648487241125-2d7615f05778','photo-1689011615152-19262401b4bf','photo-1734279135113-8bd58bc02b69','photo-1740968786460-e4cd129f98f1'];
     const servicos = d.serv.slice(0, 4).map((s, i) => ({ ...s, img: U(SV[i % SV.length]) }));
-    const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], img: U(m.photoId), cardClass: i === 1 ? 'is-active' : '' }));
+    const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], img: U(m.photoId), cardClass: '' }));
 
     const f = this.state.form, er = this.state.errors;
 
@@ -905,7 +906,14 @@ class Component extends DCLogic {
       onNome: (e) => this.field('nome', e.target.value),
       onEmpresa: (e) => this.field('empresa', e.target.value),
       onEmail: (e) => this.field('email', e.target.value),
-      onTelefone: (e) => this.field('telefone', e.target.value),
+      onTelefone: (e) => {
+        const v = e.target.value;
+        this.field('telefone', v);
+        const codes = ['+351','+258','+244','+55','+49','+39','+34','+44','+33','+1'];
+        const norm = v.replace(/[^\d+]/g, '');
+        const hit = codes.find(c => norm.startsWith(c));
+        if (hit && hit !== this.state.dial) this.setState({ dial: hit });
+      },
       f_dial: this.state.dial,
       onDial: (e) => this.setState({ dial: e.target.value }),
       onMensagem: (e) => this.field('mensagem', e.target.value)
