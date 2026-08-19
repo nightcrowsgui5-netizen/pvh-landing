@@ -27,9 +27,12 @@
 
   /* ===================== RESPONSIVO ===================== */
   .nav-hamb{display:none;}
+  img,iframe{max-width:100%;}
+  .rcol-1>*,.rcol-2>*{min-width:0;}
   @media (max-width: 900px){
     [style*="padding: 0px 44px"]{padding-left:22px !important;padding-right:22px !important;}
-    .rcol-1{grid-template-columns:1fr !important;}
+    [style*="padding: 44px"]{padding:26px !important;}
+    .rcol-1{grid-template-columns:1fr !important;gap:32px !important;}
     .rcol-2{grid-template-columns:repeat(2,1fr) !important;}
     .r-hide-m{display:none !important;}
     .r-badge{display:none !important;}
