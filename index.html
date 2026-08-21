@@ -94,7 +94,6 @@
   .team-plate p{font-size:12.5px;margin-top:4px;opacity:.85;}
   .team-toggle{flex:0 0 48px;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .3s;}
   .team-toggle:hover{background:rgba(255,255,255,.22);}
-  .team-card.is-open .team-toggle{transform:rotate(45deg);}
   .team-bio{position:absolute;inset:0;background:rgba(36,54,118,.94);color:#fff;padding:24px;display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;pointer-events:none;z-index:3;}
   .team-bio p{font-size:13.5px;line-height:1.65;}
   .team-card.is-open .team-bio{opacity:1;transform:none;}
@@ -104,11 +103,11 @@
   .serv-card:hover .serv-ov{opacity:1;}
   /* ===================== FAQ ===================== */
   .faq-item{border:1px solid #e4e8e9;border-radius:3px;background:#fff;margin-bottom:14px;overflow:hidden;}
-  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;background:none;border:none;cursor:pointer;text-align:left;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14.5px;color:#14454f;}
-  .faq-ic{flex:0 0 auto;color:#b08d4c;font-size:22px;line-height:1;transition:transform .3s;}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:'Montserrat',sans-serif;font-weight:600;font-size:16.5px;color:#14454f;}
+  .faq-ic{flex:0 0 auto;color:#b08d4c;font-size:26px;line-height:1;transition:transform .3s;}
   .faq-item.open .faq-ic{transform:rotate(45deg);}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
-  .faq-a p{padding:0 20px 18px;font-size:13.5px;color:#6b7378;line-height:1.6;}
+  .faq-a p{padding:0 22px 20px;font-size:15px;color:#6b7378;line-height:1.65;}
   .faq-item.open .faq-a{max-height:260px;}
 </style>
 </helmet>
@@ -331,7 +330,7 @@
               <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#14454f;">{{ p.nome }}</h3>
               <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;">{{ p.ano }}</span>
             </div>
-            <div style="font-size:12.5px;letter-spacing:.03em;color:#8a9297;margin-top:6px;">{{ p.cidade }}</div>
+            <div style="font-size:12.5px;letter-spacing:.03em;color:#14454f;margin-top:6px;">{{ p.cidade }}</div>
             <a onClick="{{ p.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
           </div>
         </div>
@@ -965,7 +964,17 @@ class Component extends DCLogic {
   }
   toggleMenu() { this.setState(s => ({ menuOpen: !s.menuOpen })); }
   closeMenu() { this.setState({ menuOpen: false }); }
-  teamScroll(dir) { const el = document.getElementById('team-scroll'); if (el) el.scrollBy({ left: dir * 340, behavior: 'smooth' }); }
+  teamScroll(dir) {
+    const el = document.getElementById('team-scroll'); if (!el) return;
+    const max = el.scrollWidth - el.clientWidth, step = 340;
+    if (dir > 0) {
+      if (el.scrollLeft >= max - 5) el.scrollTo({ left: 0, behavior: 'smooth' });
+      else el.scrollBy({ left: step, behavior: 'smooth' });
+    } else {
+      if (el.scrollLeft <= 5) el.scrollTo({ left: max, behavior: 'smooth' });
+      else el.scrollBy({ left: -step, behavior: 'smooth' });
+    }
+  }
   toggleTeam(i) { this.setState(s => ({ teamOpen: s.teamOpen === i ? -1 : i })); }
   toggleFaq(i) { this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i })); }
   setLang(l) { this.setState({ lang: l, menuOpen: false }); }
