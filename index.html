@@ -81,7 +81,7 @@
 <header style="{{ headerStyle }}">
   <div style="max-width:1300px;margin:0 auto;padding:0 44px;display:flex;align-items:center;justify-content:space-between;gap:32px;">
     <a href="#home" style="display:flex;align-items:center;color:inherit;">
-      <img src="{{ logoSrc }}" alt="PVH — {{ t.logoSub }}" style="height:42px;width:auto;display:block;">
+      <img src="{{ logoSrc }}" alt="PVH — {{ t.logoSub }}" style="height:36px;width:auto;display:block;">
     </a>
     <nav style="display:flex;align-items:center;gap:26px;">
       <button class="nav-hamb" onClick="{{ toggleMenu }}" aria-label="Menu" style="background:none;border:none;cursor:pointer;color:{{ navColor }};padding:4px;">
@@ -178,27 +178,27 @@
 </section>
 
 <!-- ===================== FACTOS / NÚMEROS ===================== -->
-<section class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;">
+<section id="factos" class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;">
   <!-- metade azul -->
   <div class="rcol-2" style="background:#243676;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.9;"><path d="M4 14a8 8 0 0116 0"/><path d="M10 6.8V5a2 2 0 014 0v1.8"/><line x1="2.5" y1="14" x2="21.5" y2="14"/><line x1="4" y1="17.5" x2="20" y2="17.5"/></svg>
-      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">109</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:rgba(255,255,255,.82);">{{ t.fact1 }}</p></div>
+      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc1 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:rgba(255,255,255,.82);">{{ t.fact1 }}</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.9;"><rect x="5" y="3" width="9" height="18"/><rect x="14" y="8" width="5" height="13"/><line x1="8" y1="7" x2="11" y2="7"/><line x1="8" y1="11" x2="11" y2="11"/><line x1="8" y1="15" x2="11" y2="15"/></svg>
-      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">485</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:rgba(255,255,255,.82);">{{ t.fact2 }}</p></div>
+      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc2 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:rgba(255,255,255,.82);">{{ t.fact2 }}</p></div>
     </div>
   </div>
   <!-- metade cinza -->
   <div class="rcol-2" style="background:#e7eaf1;color:#243676;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.85;"><rect x="4" y="7" width="10" height="14"/><line x1="7" y1="11" x2="11" y2="11"/><line x1="7" y1="15" x2="11" y2="15"/><path d="M14 12a4 4 0 118 0c0 2.7-4 6-4 6s-4-3.3-4-6z"/><circle cx="18" cy="12" r="1.2"/></svg>
-      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">789</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:#5a6167;">{{ t.fact3 }}</p></div>
+      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc3 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:#5a6167;">{{ t.fact3 }}</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.85;"><line x1="5" y1="21" x2="5" y2="4"/><path d="M5 4l13 3"/><line x1="5" y1="7.5" x2="14" y2="9.6"/><line x1="18" y1="7" x2="18" y2="11"/><path d="M16 11h4l-2 3z"/><line x1="3" y1="21" x2="9" y2="21"/></svg>
-      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">890</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:#5a6167;">{{ t.fact4 }}</p></div>
+      <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc4 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:#5a6167;">{{ t.fact4 }}</p></div>
     </div>
   </div>
 </section>
@@ -261,6 +261,7 @@
           <div style="padding:22px 22px 26px;">
             <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;">{{ sv.nome }}</h3>
             <p style="font-size:13px;color:#6b7378;margin-top:8px;">{{ sv.desc }}</p>
+            <a onClick="{{ sv.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.servLink }} <span style="font-size:14px;">→</span></a>
           </div>
         </div>
       </sc-for>
@@ -294,9 +295,7 @@
               <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#14454f;">{{ p.nome }}</h3>
               <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;">{{ p.ano }}</span>
             </div>
-            <div style="font-size:12.5px;letter-spacing:.04em;color:#8a9297;margin-top:4px;">{{ p.cidade }}</div>
-            <p style="font-size:13.5px;color:#6b7378;margin-top:14px;">{{ p.desc }}</p>
-            <a href="#contato" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
+            <a onClick="{{ p.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
           </div>
         </div>
       </sc-for>
@@ -509,6 +508,23 @@
   </div>
 </footer>
 
+<!-- ===================== MODAL DETALHE (projeto/serviço) ===================== -->
+<sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:110;background:rgba(8,20,24,.62);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .3s ease both;">
+    <div onClick="{{ stop }}" style="background:#fff;border-radius:4px;max-width:640px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 40px 90px rgba(0,0,0,.4);">
+      <div style="position:relative;">
+        <img src="{{ detail.img }}" alt="{{ detail.title }}" style="width:100%;height:auto;max-height:300px;object-fit:cover;display:block;">
+        <button onClick="{{ closeDetail }}" aria-label="Fechar" style="position:absolute;top:14px;right:14px;background:rgba(8,20,24,.6);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;">&times;</button>
+      </div>
+      <div style="padding:30px 34px 36px;">
+        <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:24px;line-height:1.2;color:#14454f;">{{ detail.title }}</h3>
+        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;margin-top:4px;">{{ detail.sub }}</div>
+        <p style="font-size:15px;color:#5a6167;margin-top:16px;line-height:1.75;">{{ detail.text }}</p>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
 <!-- ===================== MODAL ===================== -->
 <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:100;background:rgba(8,20,24,.6);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .3s ease both;">
@@ -549,19 +565,17 @@ class Component extends DCLogic {
     menuOpen: false,
     lang: 'pt',
     filter: 'all',
-    counts: [0,0,0,0,0,0],
+    counts: [0,0,0,0],
     countsDone: false,
     modalOpen: false,
+    detail: null,
     submitted: false,
     dial: '+351',
     form: { nome:'', empresa:'', email:'', telefone:'', mensagem:'' },
     errors: {}
   };
 
-  statVals = [
-    { value:250, suffix:'+' }, { value:30, suffix:'+' }, { value:120, suffix:'' },
-    { value:18, suffix:'' }, { value:800, suffix:' km' }, { value:99, suffix:'%' }
-  ];
+  factVals = [109, 485, 789, 890];
 
   clientesData = [
     { nome:'FERROSUL',   thumb:'imagens/photo-1431620828042-54af7f3a9e28.jpg' },
@@ -606,7 +620,7 @@ class Component extends DCLogic {
         diffEyebrow:'Grandes Diferenciais', diffTitle:'Competências que sustentam grandes obras',
         d1t:'Engenharia Ferroviária', d1d:'Projetos de via permanente, geometria e superestrutura com padrão internacional.', d2t:'Gestão de Obras', d2d:'Planeamento, controlo de prazos, custos e qualidade do estaleiro à entrega.', d3t:'Supervisão Técnica', d3d:'Fiscalização e acompanhamento contínuo garantindo conformidade normativa.', d4t:'Consultoria Especializada', d4d:'Assessoria estratégica em viabilidade, licenciamento e otimização de traçados.', d5t:'Projetos de Execução', d5d:'Pormenorização completa em BIM pronta para execução, com precisão milimétrica.', d6t:'Estudos de Viabilidade', d6d:'Análises técnico-económicas que fundamentam decisões de investimento.',
         numGrandes:'Grandes', numNumeros:'Números',
-        servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia',
+        servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia', servLink:'Ver Serviço',
         projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver Projeto',
         timeEyebrow:'Linha do Tempo', timeTitle:'Duas décadas de crescimento constante',
         clientsEyebrow:'Clientes', clientsTitle:'A confiança de quem constrói o país',
@@ -641,6 +655,22 @@ class Component extends DCLogic {
       ],
       projNome:['Modernização da Linha do Norte','Viaduto do Vale do Tejo','Ponte Ferroviária do Douro','Terminal Multimodal do Sul','Variante Ferroviária','Ramal de Mercadorias do Alentejo','Viaduto Metropolitano','Túnel da Serra da Estrela'],
       projDesc:['Projeto de execução de 180 km de via de mercadorias.','Viaduto ferroviário sobre corredor urbano.','Ponte ferroviária de grande vão em betão.','Parque de manobras e transbordo de mercadorias.','Desvio de traçado com túneis e trincheiras.','Ramal para escoamento de produção agrícola.','Estrutura elevada sobre malha urbana densa.','Travessia em maciço rochoso de 2,4 km.'],
+      projFull:[
+        'Projeto de execução para a modernização de 180 km de via de mercadorias, incluindo renovação de superestrutura, drenagem e obras de arte correntes. Toda a intervenção foi coordenada com a operação ferroviária para minimizar interrupções ao serviço.',
+        'Conceção e projeto de um viaduto ferroviário sobre um corredor urbano, com vãos otimizados para reduzir o impacto no tecido existente. Solução em betão pré-esforçado com foco em durabilidade e manutenção reduzida.',
+        'Ponte ferroviária de grande vão em betão sobre o rio Douro, dimensionada para tráfego misto. Incluiu estudo hidráulico, fundações profundas e um faseamento construtivo detalhado.',
+        'Parque de manobras e transbordo de mercadorias, integrando via, pavimentos e sistemas de movimentação de carga. O layout foi orientado à eficiência operacional e à expansão futura.',
+        'Desvio de traçado com túneis e trincheiras para contornar uma zona urbana sensível, melhorando geometria e velocidade. Envolveu coordenação geotécnica e ambiental ao longo de todo o corredor.',
+        'Ramal para escoamento de produção agrícola, ligando os polos produtores à rede principal. Incluiu projeto de via, sinalização e acessos rodoferroviários.',
+        'Estrutura elevada sobre malha urbana densa, com especial atenção ao ruído, vibração e integração paisagística. A construção foi faseada para minimizar a perturbação do trânsito local.',
+        'Travessia em maciço rochoso de 2,4 km, com estudo geológico-geotécnico aprofundado e sistemas de ventilação e segurança. Uma solução robusta para as exigentes condições de montanha.'
+      ],
+      servFull:[
+        'Conceção e pormenorização de via permanente, geometria e superestrutura, do estudo prévio ao projeto de execução. Entregamos soluções normalizadas, otimizadas e prontas para obra.',
+        'Controlo técnico e de conformidade em obra, assegurando o cumprimento de normas, prazos e qualidade. Com relatórios periódicos e acompanhamento contínuo em campo.',
+        'Gestão integrada de prazo, custo e qualidade, do estaleiro à entrega. Inclui planeamento, coordenação de equipas e controlo de desvios em tempo real.',
+        'Apoio especializado em todas as fases do projeto, de estudos de viabilidade à otimização de traçados e licenciamento. Aconselhamento independente e baseado em dados.'
+      ],
       time:[
         {ano:'2005',titulo:'Fundação',desc:'Início da atividade em consultoria ferroviária.'},
         {ano:'2010',titulo:'Primeiros Grandes Projetos',desc:'Contratos estruturantes de via permanente.'},
@@ -673,7 +703,7 @@ class Component extends DCLogic {
         diffEyebrow:'Key Strengths', diffTitle:'Capabilities that support major works',
         d1t:'Railway Engineering', d1d:'Permanent way, geometry and superstructure design to international standards.', d2t:'Works Management', d2d:'Planning and control of schedule, cost and quality from site to handover.', d3t:'Technical Supervision', d3d:'Inspection and continuous monitoring ensuring regulatory compliance.', d4t:'Specialised Consulting', d4d:'Strategic advice on feasibility, licensing and alignment optimisation.', d5t:'Detailed Design', d5d:'Complete BIM detailing ready for execution, with millimetric precision.', d6t:'Feasibility Studies', d6d:'Technical and economic analyses that support investment decisions.',
         numGrandes:'Key', numNumeros:'Figures',
-        servEyebrow:'Services', servTitle:'A complete engineering portfolio',
+        servEyebrow:'Services', servTitle:'A complete engineering portfolio', servLink:'View Service',
         projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'View Project',
         timeEyebrow:'Timeline', timeTitle:'Two decades of steady growth',
         clientsEyebrow:'Clients', clientsTitle:'Trusted by those who build the country',
@@ -708,6 +738,22 @@ class Component extends DCLogic {
       ],
       projNome:['Northern Line Modernisation','Tagus Valley Viaduct','Douro Railway Bridge','Southern Multimodal Terminal','Railway Bypass','Alentejo Freight Branch','Metropolitan Viaduct','Serra da Estrela Tunnel'],
       projDesc:['Detailed design of 180 km of freight line.','Railway viaduct over an urban corridor.','Long-span railway bridge in concrete.','Shunting yard and freight transhipment.','Alignment diversion with tunnels and cuttings.','Branch line for agricultural output flow.','Elevated structure over a dense urban network.','2.4 km crossing through a rock massif.'],
+      projFull:[
+        'Detailed design for the modernisation of 180 km of freight line, including superstructure renewal, drainage and standard engineering structures. The work was coordinated with railway operations to minimise service disruption.',
+        'Design of a railway viaduct over an urban corridor, with spans optimised to reduce the impact on the existing fabric. A prestressed-concrete solution focused on durability and low maintenance.',
+        'Long-span concrete railway bridge over the Douro river, designed for mixed traffic. It included hydraulic studies, deep foundations and a detailed construction sequence.',
+        'Shunting yard and freight transhipment facility, integrating track, pavements and cargo-handling systems. The layout was geared towards operational efficiency and future expansion.',
+        'Alignment diversion with tunnels and cuttings to bypass a sensitive urban area, improving geometry and speed. It involved geotechnical and environmental coordination along the whole corridor.',
+        'Branch line for agricultural output flow, connecting production hubs to the main network. It covered track design, signalling and road-rail access.',
+        'Elevated structure over a dense urban network, with particular attention to noise, vibration and landscape integration. Construction was phased to minimise disruption to local traffic.',
+        '2.4 km crossing through a rock massif, with in-depth geological-geotechnical study and ventilation and safety systems. A robust solution for demanding mountain conditions.'
+      ],
+      servFull:[
+        'Design and detailing of permanent way, geometry and superstructure, from preliminary study to detailed design. We deliver standardised, optimised, construction-ready solutions.',
+        'Technical and compliance control on site, ensuring adherence to standards, deadlines and quality. With periodic reports and continuous field monitoring.',
+        'Integrated management of schedule, cost and quality, from site to handover. Includes planning, team coordination and real-time deviation control.',
+        'Specialised support across all project phases, from feasibility studies to alignment optimisation and licensing. Independent, data-driven advice.'
+      ],
       time:[
         {ano:'2005',titulo:'Foundation',desc:'Start of railway consultancy activity.'},
         {ano:'2010',titulo:'First Major Projects',desc:'Structural permanent-way contracts.'},
@@ -740,7 +786,7 @@ class Component extends DCLogic {
         diffEyebrow:'Grandes Diferenciales', diffTitle:'Competencias que sostienen grandes obras',
         d1t:'Ingeniería Ferroviaria', d1d:'Proyectos de vía permanente, geometría y superestructura con estándar internacional.', d2t:'Gestión de Obras', d2d:'Planificación y control de plazos, costes y calidad desde la obra hasta la entrega.', d3t:'Supervisión Técnica', d3d:'Inspección y seguimiento continuo garantizando la conformidad normativa.', d4t:'Consultoría Especializada', d4d:'Asesoría estratégica en viabilidad, licencias y optimización de trazados.', d5t:'Proyectos de Ejecución', d5d:'Detalle completo en BIM listo para ejecución, con precisión milimétrica.', d6t:'Estudios de Viabilidad', d6d:'Análisis técnico-económicos que fundamentan decisiones de inversión.',
         numGrandes:'Grandes', numNumeros:'Cifras',
-        servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería',
+        servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería', servLink:'Ver Servicio',
         projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver Proyecto',
         timeEyebrow:'Cronología', timeTitle:'Dos décadas de crecimiento constante',
         clientsEyebrow:'Clientes', clientsTitle:'La confianza de quienes construyen el país',
@@ -775,6 +821,22 @@ class Component extends DCLogic {
       ],
       projNome:['Modernización de la Línea del Norte','Viaducto del Valle del Tajo','Puente Ferroviario del Duero','Terminal Multimodal del Sur','Variante Ferroviaria','Ramal de Mercancías del Alentejo','Viaducto Metropolitano','Túnel de la Sierra de la Estrella'],
       projDesc:['Proyecto de ejecución de 180 km de vía de mercancías.','Viaducto ferroviario sobre corredor urbano.','Puente ferroviario de gran vano en hormigón.','Patio de maniobras y transbordo de mercancías.','Desvío de trazado con túneles y trincheras.','Ramal para evacuación de producción agrícola.','Estructura elevada sobre malla urbana densa.','Travesía en macizo rocoso de 2,4 km.'],
+      projFull:[
+        'Proyecto de ejecución para la modernización de 180 km de vía de mercancías, incluyendo renovación de superestructura, drenaje y obras de arte corrientes. Toda la intervención se coordinó con la operación ferroviaria para minimizar interrupciones del servicio.',
+        'Concepción y proyecto de un viaducto ferroviario sobre un corredor urbano, con vanos optimizados para reducir el impacto en el tejido existente. Solución en hormigón pretensado centrada en durabilidad y mantenimiento reducido.',
+        'Puente ferroviario de gran vano en hormigón sobre el río Duero, dimensionado para tráfico mixto. Incluyó estudio hidráulico, cimentaciones profundas y una secuenciación constructiva detallada.',
+        'Patio de maniobras y transbordo de mercancías, integrando vía, pavimentos y sistemas de manipulación de carga. El diseño se orientó a la eficiencia operativa y a la expansión futura.',
+        'Desvío de trazado con túneles y trincheras para rodear una zona urbana sensible, mejorando geometría y velocidad. Implicó coordinación geotécnica y ambiental a lo largo de todo el corredor.',
+        'Ramal para evacuación de producción agrícola, conectando los polos productores con la red principal. Incluyó proyecto de vía, señalización y accesos carretera-ferrocarril.',
+        'Estructura elevada sobre malla urbana densa, con especial atención al ruido, la vibración y la integración paisajística. La construcción fue por fases para minimizar la perturbación del tráfico local.',
+        'Travesía en macizo rocoso de 2,4 km, con estudio geológico-geotécnico en profundidad y sistemas de ventilación y seguridad. Una solución robusta para exigentes condiciones de montaña.'
+      ],
+      servFull:[
+        'Concepción y detalle de vía permanente, geometría y superestructura, del estudio previo al proyecto de ejecución. Entregamos soluciones normalizadas, optimizadas y listas para obra.',
+        'Control técnico y de conformidad en obra, asegurando el cumplimiento de normas, plazos y calidad. Con informes periódicos y seguimiento continuo en campo.',
+        'Gestión integrada de plazo, coste y calidad, de la obra a la entrega. Incluye planificación, coordinación de equipos y control de desviaciones en tiempo real.',
+        'Apoyo especializado en todas las fases del proyecto, de estudios de viabilidad a la optimización de trazados y licencias. Asesoramiento independiente y basado en datos.'
+      ],
       time:[
         {ano:'2005',titulo:'Fundación',desc:'Inicio de la actividad en consultoría ferroviaria.'},
         {ano:'2010',titulo:'Primeros Grandes Proyectos',desc:'Contratos estructurantes de vía permanente.'},
@@ -805,7 +867,7 @@ class Component extends DCLogic {
       if (s !== this.state.scrolled) this.setState({ scrolled: s });
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
-    const el = document.getElementById('numeros');
+    const el = document.getElementById('factos');
     if (el && 'IntersectionObserver' in window) {
       this._io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting && !this.state.countsDone) this.animateCounts(); });
@@ -822,7 +884,7 @@ class Component extends DCLogic {
   animateCounts() {
     this.setState({ countsDone: true });
     const dur = 1600, start = performance.now();
-    const targets = this.statVals.map(s => s.value);
+    const targets = this.factVals;
     let prev = null;
     const tick = (now) => {
       const t = Math.min(1, (now - start) / dur);
@@ -842,6 +904,8 @@ class Component extends DCLogic {
   setFilter(f) { this.setState({ filter: f }); }
   openModal() { this.setState({ modalOpen: true, submitted: false }); }
   closeModal() { this.setState({ modalOpen: false }); }
+  openDetail(d) { this.setState({ detail: d }); }
+  closeDetail() { this.setState({ detail: null }); }
   field(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v }, errors: { ...s.errors, [k]: undefined } })); }
   submitForm() {
     const f = this.state.form, errors = {}, t = this.i18n[this.state.lang].ui;
@@ -860,8 +924,6 @@ class Component extends DCLogic {
     const d = this.i18n[this.state.lang];
     const L = this.state.lang;
 
-    const stats = this.statVals.map((s, i) => ({ display: this.state.counts[i] + s.suffix, label: d.statLabel[i], cap: d.statCap[i] }));
-
     const filtros = this.catKeys.map((k, i) => {
       const active = k === this.state.filter;
       return {
@@ -871,10 +933,17 @@ class Component extends DCLogic {
       };
     });
     const U = (id) => `imagens/${id}.jpg`;
-    const projAll = this.projMeta.map((m, i) => ({ ...m, nome: d.projNome[i], desc: d.projDesc[i], categoria: d.catLabels[this.catKeys.indexOf(m.catKey)], img: U(m.imgId) }));
+    const projAll = this.projMeta.map((m, i) => {
+      const img = U(m.imgId), nome = d.projNome[i], full = d.projFull[i], ano = m.ano;
+      return { ...m, nome, desc: d.projDesc[i], full, categoria: d.catLabels[this.catKeys.indexOf(m.catKey)], img,
+        onOpen: () => this.openDetail({ img, title: nome, sub: ano, text: full }) };
+    });
     const projetos = this.state.filter === 'all' ? projAll : projAll.filter(p => p.catKey === this.state.filter);
     const SV = ['photo-1431620828042-54af7f3a9e28','photo-1648487241125-2d7615f05778','photo-1689011615152-19262401b4bf','photo-1734279135113-8bd58bc02b69','photo-1740968786460-e4cd129f98f1'];
-    const servicos = d.serv.slice(0, 4).map((s, i) => ({ ...s, img: U(SV[i % SV.length]) }));
+    const servicos = d.serv.slice(0, 4).map((s, i) => {
+      const img = U(SV[i % SV.length]), full = d.servFull[i];
+      return { ...s, img, full, onOpen: () => this.openDetail({ img, title: s.nome, sub: '', text: full }) };
+    });
     const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], img: U(m.photoId), cardClass: '' }));
 
     const f = this.state.form, er = this.state.errors;
@@ -892,7 +961,14 @@ class Component extends DCLogic {
       opPt: L === 'pt' ? '1' : '.5',
       opEn: L === 'en' ? '1' : '.5',
       opEs: L === 'es' ? '1' : '.5',
-      stats,
+      fc1: this.state.counts[0],
+      fc2: this.state.counts[1],
+      fc3: this.state.counts[2],
+      fc4: this.state.counts[3],
+      detail: this.state.detail,
+      detailOpen: !!this.state.detail,
+      openDetail: (dt) => this.openDetail(dt),
+      closeDetail: () => this.closeDetail(),
       servicos,
       filtros,
       projetos,
