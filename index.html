@@ -59,12 +59,12 @@
   #home p,#home span{text-shadow:0 1px 10px rgba(8,20,24,.5);}
 
   /* ===================== INDICADORES (entrada) ===================== */
-  .fact-left{transform:translateX(-70px);opacity:0;transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s ease;}
-  .fact-right{transform:translateX(70px);opacity:0;transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s ease;}
+  .fact-left{transform:translateX(-100%);opacity:0;transition:transform 1s cubic-bezier(.22,.61,.36,1),opacity .8s ease;}
+  .fact-right{transform:translateX(100%);opacity:0;transition:transform 1s cubic-bezier(.22,.61,.36,1),opacity .8s ease;}
   .factos-in .fact-left,.factos-in .fact-right{transform:translateX(0);opacity:1;}
 
   /* ===================== EQUIPA (carrossel) ===================== */
-  .team-scroll{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:8px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .team-scroll{display:flex;gap:28px;justify-content:safe center;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:8px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .team-scroll::-webkit-scrollbar{display:none;}
   .team-scroll>.team-card{flex:0 0 300px;scroll-snap-align:center;}
   .team-nav{position:absolute;top:calc(50% - 20px);transform:translateY(-50%);z-index:4;width:46px;height:46px;border-radius:50%;border:1px solid #e4e8e9;background:#fff;color:#243676;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 22px rgba(15,53,61,.16);transition:background .2s,color .2s;}
@@ -107,12 +107,11 @@
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
       <div class="nav-links {{ menuClass }}" style="display:flex;align-items:center;gap:26px;">
-      <a href="#home" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navHome }}</a>
       <a href="#quem-somos" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navAbout }}</a>
-      <a href="#equipe" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navTeam }}</a>
+      <a href="#diferenciais" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navDiff }}</a>
       <a href="#servicos" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navServices }}</a>
       <a href="#projetos" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navProjects }}</a>
-      <a href="#clientes" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navClients }}</a>
+      <a href="#equipe" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navTeam }}</a>
       <a href="#contato" onClick="{{ closeMenu }}" style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;color:{{ navColor }};">{{ t.navContact }}</a>
       <div class="nav-flags" style="display:flex;align-items:center;gap:10px;padding-left:18px;border-left:1px solid rgba(140,150,155,.35);">
         <span title="Português" onClick="{{ setPt }}" style="width:48px;height:32px;border-radius:3px;overflow:hidden;display:inline-flex;border:1px solid rgba(0,0,0,.15);box-shadow:0 1px 2px rgba(0,0,0,.12);cursor:pointer;opacity:{{ opPt }};transition:opacity .2s;">
@@ -197,7 +196,7 @@
 </section>
 
 <!-- ===================== FACTOS / NÚMEROS ===================== -->
-<section id="factos" class="rcol-1 {{ factosCls }}" style="display:grid;grid-template-columns:1fr 1fr;">
+<section id="factos" class="rcol-1 {{ factosCls }}" style="display:grid;grid-template-columns:1fr 1fr;overflow:hidden;">
   <!-- metade azul -->
   <div class="rcol-2 fact-left" style="background:#243676;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
     <div style="display:flex;align-items:center;gap:18px;">
@@ -223,7 +222,7 @@
 </section>
 
 <!-- ===================== DIFERENCIAIS ===================== -->
-<section style="padding:110px 0;background:#f4f6f6;">
+<section id="diferenciais" style="padding:110px 0;background:#f4f6f6;">
   <div style="max-width:1300px;margin:0 auto;padding:0 44px;">
     <div style="text-align:center;max-width:680px;margin:0 auto 64px;">
       <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.diffEyebrow }}</span>
@@ -323,7 +322,7 @@
 </section>
 
 <!-- ===================== CLIENTES ===================== -->
-<section id="clientes" style="padding:100px 0;background:#ffffff;overflow:hidden;">
+<section id="clientes" style="padding:100px 0 26px;background:#ffffff;overflow:hidden;">
   <div style="max-width:1300px;margin:0 auto 48px;padding:0 44px;text-align:center;">
     <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.clientsEyebrow }}</span>
     <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(26px,2.6vw,36px);line-height:1.16;color:#14454f;margin-top:14px;">{{ t.clientsTitle }}</h2>
@@ -341,7 +340,7 @@
 </section>
 
 <!-- ===================== EQUIPE ===================== -->
-<section id="equipe" style="padding:120px 0;background:#ffffff;">
+<section id="equipe" style="padding:34px 0 110px;background:#f4f6f6;">
   <div style="max-width:1300px;margin:0 auto;padding:0 44px;">
     <div style="text-align:center;max-width:680px;margin:0 auto 60px;">
       <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.teamEyebrow }}</span>
@@ -387,7 +386,7 @@
 </section>
 
 <!-- ===================== CONTATO ===================== -->
-<section id="contato" style="padding:120px 0;background:#f4f6f6;">
+<section id="contato" style="padding:120px 0;background:#ffffff;">
   <div class="rcol-1" style="max-width:1300px;margin:0 auto;padding:0 44px;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
     <div>
       <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.contactEyebrow }}</span>
@@ -404,7 +403,7 @@
         <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+da+Rep%C3%BAblica+50%2C+Lisboa" target="_blank" rel="noopener" style="position:absolute;bottom:10px;right:10px;background:#14454f;color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11px;letter-spacing:.04em;padding:8px 14px;border-radius:2px;text-decoration:none;">{{ t.mapBtn }} ↗</a>
       </div>
     </div>
-    <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;padding:44px;">
+    <div style="background:#f4f6f6;border:1px solid #e4e8e9;border-radius:3px;padding:44px;">
       <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
         <div style="text-align:center;padding:40px 0;">
           <div style="width:64px;height:64px;border-radius:50%;background:#14454f;color:#d9c191;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M7 15l5 5 11-11" stroke="currentColor" stroke-width="2.4" fill="none"/></svg></div>
@@ -436,7 +435,7 @@
   <div class="rcol-2" style="max-width:1300px;margin:0 auto;padding:0 44px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;">
     <div>
       <div style="display:flex;align-items:center;gap:12px;">
-        <img src="imagens/PVH_logo_white.png" alt="PVH" style="height:40px;width:auto;display:block;">
+        <img src="imagens/PVH_logo.png" alt="PVH" style="height:40px;width:auto;display:block;">
       </div>
       <p style="font-size:13.5px;margin-top:20px;max-width:300px;line-height:1.7;">{{ t.footDesc }}</p>
       <div style="display:flex;gap:10px;margin-top:24px;">
@@ -585,7 +584,7 @@ class Component extends DCLogic {
   i18n = {
     pt: {
       ui: {
-        navHome:'INÍCIO', navAbout:'QUEM SOMOS', navTeam:'EQUIPA', navServices:'SERVIÇOS', navProjects:'PROJETOS', navClients:'CLIENTES', navContact:'CONTACTOS',
+        navHome:'INÍCIO', navAbout:'QUEM SOMOS', navTeam:'EQUIPA', navServices:'SERVIÇOS', navProjects:'PROJETOS', navClients:'CLIENTES', navContact:'CONTACTOS', navDiff:'DIFERENCIAIS',
         logoSub:'Engenharia Ferroviária',
         heroEyebrow:'Infraestrutura Ferroviária', heroTitle:'Engenharia Ferroviária para Grandes Projetos', heroText:'Planeamento, Projetos, Fiscalização, Supervisão, Consultoria e Gestão de Obras Ferroviárias.', heroBtn1:'Conheça os nossos serviços', heroBtn2:'Fale Connosco', heroScroll:'Deslize',
         aboutEyebrow:'Quem Somos', aboutTitle:'Engenharia de precisão para a infraestrutura que move o país', aboutP1:'A PVH é uma consultora de engenharia ferroviária que integra planeamento, projeto e gestão de obras numa única cadeia de valor. Combinamos rigor técnico, tecnologia BIM e experiência de terreno para entregar infraestrutura segura, durável e economicamente eficiente.', aboutP2:'Atuamos em ferrovias, pontes, viadutos, terminais e obras especiais, ao lado de operadores, construtoras e organismos públicos em todo o território nacional.', badgeText1:'anos a moldar', badgeText2:'a malha ferroviária',
@@ -593,8 +592,8 @@ class Component extends DCLogic {
         diffEyebrow:'Grandes Diferenciais', diffTitle:'Competências que sustentam grandes obras',
         d1t:'Engenharia Ferroviária', d1d:'Projetos de via permanente, geometria e superestrutura com padrão internacional.', d2t:'Gestão de Obras', d2d:'Planeamento, controlo de prazos, custos e qualidade do estaleiro à entrega.', d3t:'Supervisão Técnica', d3d:'Fiscalização e acompanhamento contínuo garantindo conformidade normativa.', d4t:'Consultoria Especializada', d4d:'Assessoria estratégica em viabilidade, licenciamento e otimização de traçados.', d5t:'Projetos de Execução', d5d:'Pormenorização completa em BIM pronta para execução, com precisão milimétrica.', d6t:'Estudos de Viabilidade', d6d:'Análises técnico-económicas que fundamentam decisões de investimento.',
         numGrandes:'Grandes', numNumeros:'Números',
-        servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia', servLink:'Ver Serviço',
-        projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver Projeto',
+        servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia', servLink:'Ver mais',
+        projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver mais',
         timeEyebrow:'Linha do Tempo', timeTitle:'Duas décadas de crescimento constante',
         clientsEyebrow:'Clientes', clientsTitle:'A confiança de quem constrói o país',
         testEyebrow:'Testemunhos', testTitle:'O que dizem os nossos parceiros',
@@ -668,7 +667,7 @@ class Component extends DCLogic {
     },
     en: {
       ui: {
-        navHome:'HOME', navAbout:'ABOUT', navTeam:'TEAM', navServices:'SERVICES', navProjects:'PROJECTS', navClients:'CLIENTS', navContact:'CONTACT',
+        navHome:'HOME', navAbout:'ABOUT', navTeam:'TEAM', navServices:'SERVICES', navProjects:'PROJECTS', navClients:'CLIENTS', navContact:'CONTACT', navDiff:'STRENGTHS',
         logoSub:'Railway Engineering',
         heroEyebrow:'Railway Infrastructure', heroTitle:'Railway Engineering for Major Projects', heroText:'Planning, Design, Inspection, Supervision, Consulting and Railway Works Management.', heroBtn1:'Explore our services', heroBtn2:'Get in Touch', heroScroll:'Scroll',
         aboutEyebrow:'About Us', aboutTitle:'Precision engineering for the infrastructure that moves the country', aboutP1:'PVH is a railway engineering consultancy that integrates planning, design and works management into a single value chain. We combine technical rigour, BIM technology and field experience to deliver safe, durable and cost-efficient infrastructure.', aboutP2:'We operate across railways, bridges, viaducts, terminals and special works, alongside operators, contractors and public bodies throughout the country.', badgeText1:'years shaping', badgeText2:'the railway network',
@@ -676,8 +675,8 @@ class Component extends DCLogic {
         diffEyebrow:'Key Strengths', diffTitle:'Capabilities that support major works',
         d1t:'Railway Engineering', d1d:'Permanent way, geometry and superstructure design to international standards.', d2t:'Works Management', d2d:'Planning and control of schedule, cost and quality from site to handover.', d3t:'Technical Supervision', d3d:'Inspection and continuous monitoring ensuring regulatory compliance.', d4t:'Specialised Consulting', d4d:'Strategic advice on feasibility, licensing and alignment optimisation.', d5t:'Detailed Design', d5d:'Complete BIM detailing ready for execution, with millimetric precision.', d6t:'Feasibility Studies', d6d:'Technical and economic analyses that support investment decisions.',
         numGrandes:'Key', numNumeros:'Figures',
-        servEyebrow:'Services', servTitle:'A complete engineering portfolio', servLink:'View Service',
-        projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'View Project',
+        servEyebrow:'Services', servTitle:'A complete engineering portfolio', servLink:'See more',
+        projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'See more',
         timeEyebrow:'Timeline', timeTitle:'Two decades of steady growth',
         clientsEyebrow:'Clients', clientsTitle:'Trusted by those who build the country',
         testEyebrow:'Testimonials', testTitle:'What our partners say',
@@ -751,7 +750,7 @@ class Component extends DCLogic {
     },
     es: {
       ui: {
-        navHome:'INICIO', navAbout:'QUIÉNES SOMOS', navTeam:'EQUIPO', navServices:'SERVICIOS', navProjects:'PROYECTOS', navClients:'CLIENTES', navContact:'CONTACTO',
+        navHome:'INICIO', navAbout:'QUIÉNES SOMOS', navTeam:'EQUIPO', navServices:'SERVICIOS', navProjects:'PROYECTOS', navClients:'CLIENTES', navContact:'CONTACTO', navDiff:'DIFERENCIALES',
         logoSub:'Ingeniería Ferroviaria',
         heroEyebrow:'Infraestructura Ferroviaria', heroTitle:'Ingeniería Ferroviaria para Grandes Proyectos', heroText:'Planificación, Proyectos, Inspección, Supervisión, Consultoría y Gestión de Obras Ferroviarias.', heroBtn1:'Conozca nuestros servicios', heroBtn2:'Contáctenos', heroScroll:'Desliza',
         aboutEyebrow:'Quiénes Somos', aboutTitle:'Ingeniería de precisión para la infraestructura que mueve el país', aboutP1:'PVH es una consultora de ingeniería ferroviaria que integra planificación, proyecto y gestión de obras en una única cadena de valor. Combinamos rigor técnico, tecnología BIM y experiencia de campo para entregar infraestructura segura, duradera y económicamente eficiente.', aboutP2:'Actuamos en ferrocarriles, puentes, viaductos, terminales y obras especiales, junto a operadores, constructoras y organismos públicos en todo el territorio nacional.', badgeText1:'años moldeando', badgeText2:'la red ferroviaria',
@@ -759,8 +758,8 @@ class Component extends DCLogic {
         diffEyebrow:'Grandes Diferenciales', diffTitle:'Competencias que sostienen grandes obras',
         d1t:'Ingeniería Ferroviaria', d1d:'Proyectos de vía permanente, geometría y superestructura con estándar internacional.', d2t:'Gestión de Obras', d2d:'Planificación y control de plazos, costes y calidad desde la obra hasta la entrega.', d3t:'Supervisión Técnica', d3d:'Inspección y seguimiento continuo garantizando la conformidad normativa.', d4t:'Consultoría Especializada', d4d:'Asesoría estratégica en viabilidad, licencias y optimización de trazados.', d5t:'Proyectos de Ejecución', d5d:'Detalle completo en BIM listo para ejecución, con precisión milimétrica.', d6t:'Estudios de Viabilidad', d6d:'Análisis técnico-económicos que fundamentan decisiones de inversión.',
         numGrandes:'Grandes', numNumeros:'Cifras',
-        servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería', servLink:'Ver Servicio',
-        projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver Proyecto',
+        servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería', servLink:'Ver más',
+        projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver más',
         timeEyebrow:'Cronología', timeTitle:'Dos décadas de crecimiento constante',
         clientsEyebrow:'Clientes', clientsTitle:'La confianza de quienes construyen el país',
         testEyebrow:'Testimonios', testTitle:'Lo que dicen nuestros socios',
