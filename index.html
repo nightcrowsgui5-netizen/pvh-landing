@@ -15,7 +15,6 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  html,body{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cg%20stroke%3D%27%23ffffff%27%20stroke-width%3D%271.5%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%3E%3Crect%20x%3D%275%27%20y%3D%272.5%27%20width%3D%2714%27%20height%3D%2715%27%20rx%3D%274.2%27%20fill%3D%27%23243676%27%2F%3E%3Crect%20x%3D%277.6%27%20y%3D%275%27%20width%3D%278.8%27%20height%3D%274.6%27%20rx%3D%271.4%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%3Ccircle%20cx%3D%279%27%20cy%3D%2713.4%27%20r%3D%271.15%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2713.4%27%20r%3D%271.15%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%3Cpath%20d%3D%27M8.5%2017.5l-2%203.5%27%20%2F%3E%3Cpath%20d%3D%27M15.5%2017.5l2%203.5%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 5 4, auto;}
   body{font-family:'Inter',system-ui,sans-serif;color:#3a4045;background:#ffffff;line-height:1.6;-webkit-font-smoothing:antialiased;}
   a{color:#14454f;text-decoration:none;transition:color .25s;}
   a:hover{color:#b08d4c;}
@@ -58,6 +57,25 @@
   /* ===================== HERO (legibilidade) ===================== */
   #home h1{text-shadow:0 2px 16px rgba(8,20,24,.55);}
   #home p,#home span{text-shadow:0 1px 10px rgba(8,20,24,.5);}
+
+  /* ===================== INDICADORES (entrada) ===================== */
+  .fact-left{transform:translateX(-70px);opacity:0;transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s ease;}
+  .fact-right{transform:translateX(70px);opacity:0;transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s ease;}
+  .factos-in .fact-left,.factos-in .fact-right{transform:translateX(0);opacity:1;}
+
+  /* ===================== EQUIPA (carrossel) ===================== */
+  .team-scroll{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:8px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .team-scroll::-webkit-scrollbar{display:none;}
+  .team-scroll>.team-card{flex:0 0 300px;scroll-snap-align:center;}
+  .team-nav{position:absolute;top:calc(50% - 20px);transform:translateY(-50%);z-index:4;width:46px;height:46px;border-radius:50%;border:1px solid #e4e8e9;background:#fff;color:#243676;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 22px rgba(15,53,61,.16);transition:background .2s,color .2s;}
+  .team-nav:hover{background:#243676;color:#fff;}
+  .team-nav-prev{left:-14px;}
+  .team-nav-next{right:-14px;}
+  @media (max-width:900px){
+    .team-scroll>.team-card{flex:0 0 80%;}
+    .team-nav-prev{left:2px;}
+    .team-nav-next{right:2px;}
+  }
 
   /* ===================== EQUIPA (cards) ===================== */
   .team-card{position:relative;border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(15,53,61,.08);transition:transform .4s ease,box-shadow .4s ease;}
@@ -179,9 +197,9 @@
 </section>
 
 <!-- ===================== FACTOS / NÚMEROS ===================== -->
-<section id="factos" class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;">
+<section id="factos" class="rcol-1 {{ factosCls }}" style="display:grid;grid-template-columns:1fr 1fr;">
   <!-- metade azul -->
-  <div class="rcol-2" style="background:#243676;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
+  <div class="rcol-2 fact-left" style="background:#243676;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.9;"><path d="M4 14a8 8 0 0116 0"/><path d="M10 6.8V5a2 2 0 014 0v1.8"/><line x1="2.5" y1="14" x2="21.5" y2="14"/><line x1="4" y1="17.5" x2="20" y2="17.5"/></svg>
       <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc1 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:rgba(255,255,255,.82);">{{ t.fact1 }}</p></div>
@@ -192,7 +210,7 @@
     </div>
   </div>
   <!-- metade cinza -->
-  <div class="rcol-2" style="background:#e7eaf1;color:#243676;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
+  <div class="rcol-2 fact-right" style="background:#e7eaf1;color:#243676;display:grid;grid-template-columns:1fr 1fr;gap:36px 28px;padding:66px clamp(24px,5vw,64px);">
     <div style="display:flex;align-items:center;gap:18px;">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.85;"><rect x="4" y="7" width="10" height="14"/><line x1="7" y1="11" x2="11" y2="11"/><line x1="7" y1="15" x2="11" y2="15"/><path d="M14 12a4 4 0 118 0c0 2.7-4 6-4 6s-4-3.3-4-6z"/><circle cx="18" cy="12" r="1.2"/></svg>
       <div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.4vw,46px);line-height:1;">{{ fc3 }}</div><p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;color:#5a6167;">{{ t.fact3 }}</p></div>
@@ -257,7 +275,7 @@
       <sc-for list="{{ servicos }}" as="sv" hint-placeholder-count="12">
         <div style="border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;background:#fff;transition:box-shadow .3s;" style-hover="box-shadow:0 18px 40px rgba(15,53,61,.1);">
           <div style="aspect-ratio:3/2;overflow:hidden;">
-            <img src="{{ sv.img }}" alt="{{ sv.nome }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="{{ sv.img }}" alt="{{ sv.nome }}" onClick="{{ sv.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;">
           </div>
           <div style="padding:22px 22px 26px;">
             <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;">{{ sv.nome }}</h3>
@@ -288,7 +306,7 @@
       <sc-for list="{{ projetos }}" as="p" hint-placeholder-count="6">
         <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(15,53,61,.14);">
           <div style="position:relative;aspect-ratio:16/11;overflow:hidden;">
-            <img src="{{ p.img }}" alt="{{ p.nome }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;" style-hover="transform:scale(1.05);">
+            <img src="{{ p.img }}" alt="{{ p.nome }}" onClick="{{ p.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;cursor:pointer;" style-hover="transform:scale(1.05);">
             <span style="position:absolute;top:14px;left:14px;background:rgba(20,69,79,.92);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:2px;">{{ p.categoria }}</span>
           </div>
           <div style="padding:26px;">
@@ -300,31 +318,6 @@
           </div>
         </div>
       </sc-for>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== LINHA DO TEMPO ===================== -->
-<section style="position:relative;padding:120px 0;background:#14454f;color:#fff;overflow:hidden;">
-  <img src="imagens/photo-1689011615152-19262401b4bf.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-  <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(13,47,54,.82),rgba(20,69,79,.7));"></div>
-  <div style="position:relative;max-width:1300px;margin:0 auto;padding:0 44px;">
-    <div style="text-align:center;max-width:680px;margin:0 auto 72px;">
-      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#d9c191;">{{ t.timeEyebrow }}</span>
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.16;color:#fff;margin-top:16px;">{{ t.timeTitle }}</h2>
-    </div>
-    <div style="position:relative;">
-      <div style="position:absolute;top:7px;left:0;right:0;height:2px;background:rgba(255,255,255,.16);"></div>
-      <div class="rcol-1" style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;">
-        <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
-          <div style="position:relative;padding-top:34px;">
-            <span style="position:absolute;top:0;left:0;width:16px;height:16px;border-radius:50%;background:#b08d4c;border:3px solid #14454f;box-shadow:0 0 0 2px #b08d4c;"></span>
-            <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;color:#d9c191;">{{ t.ano }}</div>
-            <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#fff;margin-top:8px;">{{ t.titulo }}</div>
-            <p style="font-size:13px;color:rgba(255,255,255,.66);margin-top:8px;">{{ t.desc }}</p>
-          </div>
-        </sc-for>
-      </div>
     </div>
   </div>
 </section>
@@ -347,31 +340,6 @@
   </div>
 </section>
 
-<!-- ===================== DEPOIMENTOS ===================== -->
-<section style="padding:110px 0;background:#f4f6f6;">
-  <div style="max-width:1300px;margin:0 auto;padding:0 44px;">
-    <div style="text-align:center;max-width:680px;margin:0 auto 60px;">
-      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.testEyebrow }}</span>
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.16;color:#14454f;margin-top:16px;">{{ t.testTitle }}</h2>
-    </div>
-    <div class="rcol-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;">
-      <sc-for list="{{ depoimentos }}" as="d" hint-placeholder-count="3">
-        <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;padding:36px 32px;">
-          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:44px;line-height:.6;color:#d9c191;">&ldquo;</div>
-          <p style="font-size:15px;color:#4a5157;margin-top:16px;font-style:italic;">{{ d.texto }}</p>
-          <div style="display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid #eceff0;">
-            <img src="{{ d.foto }}" alt="{{ d.nome }}" loading="lazy" decoding="async" style="width:52px;height:52px;border-radius:50%;flex-shrink:0;object-fit:cover;display:block;">
-            <div>
-              <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14.5px;color:#14454f;">{{ d.nome }}</div>
-              <div style="font-size:12.5px;color:#8a9297;">{{ d.empresa }}</div>
-            </div>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </div>
-</section>
-
 <!-- ===================== EQUIPE ===================== -->
 <section id="equipe" style="padding:120px 0;background:#ffffff;">
   <div style="max-width:1300px;margin:0 auto;padding:0 44px;">
@@ -379,7 +347,9 @@
       <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.teamEyebrow }}</span>
       <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.16;color:#14454f;margin-top:16px;">{{ t.teamTitle }}</h2>
     </div>
-    <div class="rcol-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:960px;margin:0 auto;">
+    <div style="position:relative;max-width:1080px;margin:0 auto;">
+      <button onClick="{{ teamPrev }}" class="team-nav team-nav-prev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div id="team-scroll" class="team-scroll">
       <sc-for list="{{ equipe }}" as="m" hint-placeholder-count="3">
         <div class="team-card {{ m.cardClass }}">
           <div class="team-imgwrap">
@@ -397,6 +367,8 @@
           </div>
         </div>
       </sc-for>
+      </div>
+      <button onClick="{{ teamNext }}" class="team-nav team-nav-next" aria-label="Seguinte"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </div>
 </section>
@@ -411,7 +383,6 @@
   <div style="position:relative;max-width:900px;margin:0 auto;padding:0 44px;text-align:center;">
     <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.14;color:#fff;letter-spacing:-.01em;text-wrap:balance;">{{ t.ctaTitle }}</h2>
     <p style="font-size:17px;color:rgba(255,255,255,.8);margin-top:22px;max-width:600px;margin-left:auto;margin-right:auto;">{{ t.ctaText }}</p>
-    <button onClick="{{ openModal }}" style="margin-top:38px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;letter-spacing:.05em;color:#fff;background:#243676;border:none;padding:19px 46px;border-radius:2px;cursor:pointer;transition:background .25s;" style-hover="background:#1a295e;">{{ t.ctaBtn }}</button>
   </div>
 </section>
 
@@ -568,6 +539,7 @@ class Component extends DCLogic {
     filter: 'all',
     counts: [0,0,0,0],
     countsDone: false,
+    factsIn: false,
     modalOpen: false,
     detail: null,
     submitted: false,
@@ -871,11 +843,17 @@ class Component extends DCLogic {
     const el = document.getElementById('factos');
     if (el && 'IntersectionObserver' in window) {
       this._io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting && !this.state.countsDone) this.animateCounts(); });
-      }, { threshold: 0.35 });
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            if (!this.state.countsDone) this.animateCounts();
+            if (!this.state.factsIn) this.setState({ factsIn: true });
+          }
+        });
+      }, { threshold: 0.3 });
       this._io.observe(el);
     } else {
       this.animateCounts();
+      this.setState({ factsIn: true });
     }
   }
   componentWillUnmount() {
@@ -901,6 +879,7 @@ class Component extends DCLogic {
   }
   toggleMenu() { this.setState(s => ({ menuOpen: !s.menuOpen })); }
   closeMenu() { this.setState({ menuOpen: false }); }
+  teamScroll(dir) { const el = document.getElementById('team-scroll'); if (el) el.scrollBy({ left: dir * 340, behavior: 'smooth' }); }
   setLang(l) { this.setState({ lang: l, menuOpen: false }); }
   setFilter(f) { this.setState({ filter: f }); }
   openModal() { this.setState({ modalOpen: true, submitted: false }); }
@@ -970,6 +949,9 @@ class Component extends DCLogic {
       detailOpen: !!this.state.detail,
       openDetail: (dt) => this.openDetail(dt),
       closeDetail: () => this.closeDetail(),
+      teamPrev: () => this.teamScroll(-1),
+      teamNext: () => this.teamScroll(1),
+      factosCls: this.state.factsIn ? 'factos-in' : '',
       servicos,
       filtros,
       projetos,
