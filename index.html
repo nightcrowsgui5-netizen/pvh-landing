@@ -87,10 +87,29 @@
   .team-social a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;color:#fff;background:#243676;transition:background .25s;}
   .team-social a:hover{background:#1a295e;}
   .team-card:hover .team-social,.team-card.is-active .team-social{transform:translateX(0);}
-  .team-plate{background:#243676;color:#fff;padding:22px 16px;text-align:center;transition:background .3s;}
-  .team-card.is-active .team-plate{background:#e7eaf1;color:#243676;}
-  .team-plate h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;line-height:1.2;}
-  .team-plate p{font-size:13px;margin-top:5px;opacity:.85;}
+  .team-plate{background:#243676;color:#fff;display:flex;align-items:stretch;justify-content:space-between;transition:background .3s;}
+  .team-plate-txt{padding:18px 14px 18px 20px;text-align:left;}
+  .team-card.is-active .team-plate,.team-card.is-open .team-plate{background:#1a295e;}
+  .team-plate h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;line-height:1.2;}
+  .team-plate p{font-size:12.5px;margin-top:4px;opacity:.85;}
+  .team-toggle{flex:0 0 48px;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .3s;}
+  .team-toggle:hover{background:rgba(255,255,255,.22);}
+  .team-card.is-open .team-toggle{transform:rotate(45deg);}
+  .team-bio{position:absolute;inset:0;background:rgba(36,54,118,.94);color:#fff;padding:24px;display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;pointer-events:none;z-index:3;}
+  .team-bio p{font-size:13.5px;line-height:1.65;}
+  .team-card.is-open .team-bio{opacity:1;transform:none;}
+  /* ===================== SERVIÇOS (hover) ===================== */
+  .serv-ov{position:absolute;inset:0;background:rgba(36,54,118,.88);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;opacity:0;transition:opacity .35s ease;pointer-events:none;}
+  .serv-ov p{font-size:13.5px;line-height:1.6;}
+  .serv-card:hover .serv-ov{opacity:1;}
+  /* ===================== FAQ ===================== */
+  .faq-item{border:1px solid #e4e8e9;border-radius:3px;background:#fff;margin-bottom:14px;overflow:hidden;}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;background:none;border:none;cursor:pointer;text-align:left;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14.5px;color:#14454f;}
+  .faq-ic{flex:0 0 auto;color:#b08d4c;font-size:22px;line-height:1;transition:transform .3s;}
+  .faq-item.open .faq-ic{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .faq-a p{padding:0 20px 18px;font-size:13.5px;color:#6b7378;line-height:1.6;}
+  .faq-item.open .faq-a{max-height:260px;}
 </style>
 </helmet>
 
@@ -272,14 +291,13 @@
     </div>
     <div class="rcol-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;">
       <sc-for list="{{ servicos }}" as="sv" hint-placeholder-count="12">
-        <div style="border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;background:#fff;transition:box-shadow .3s;" style-hover="box-shadow:0 18px 40px rgba(15,53,61,.1);">
-          <div style="aspect-ratio:3/2;overflow:hidden;">
+        <div class="serv-card" style="border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;background:#fff;transition:box-shadow .3s;" style-hover="box-shadow:0 18px 40px rgba(15,53,61,.1);">
+          <div class="serv-imgwrap" style="aspect-ratio:3/2;overflow:hidden;position:relative;">
             <img src="{{ sv.img }}" alt="{{ sv.nome }}" onClick="{{ sv.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;">
+            <div class="serv-ov"><p>{{ sv.desc }}</p></div>
           </div>
-          <div style="padding:22px 22px 26px;">
-            <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;">{{ sv.nome }}</h3>
-            <p style="font-size:13px;color:#6b7378;margin-top:8px;">{{ sv.desc }}</p>
-            <a onClick="{{ sv.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.servLink }} <span style="font-size:14px;">→</span></a>
+          <div style="padding:20px 22px;">
+            <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;text-align:center;">{{ sv.nome }}</h3>
           </div>
         </div>
       </sc-for>
@@ -313,6 +331,7 @@
               <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#14454f;">{{ p.nome }}</h3>
               <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;">{{ p.ano }}</span>
             </div>
+            <div style="font-size:12.5px;letter-spacing:.03em;color:#8a9297;margin-top:6px;">{{ p.cidade }}</div>
             <a onClick="{{ p.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
           </div>
         </div>
@@ -359,10 +378,11 @@
               <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M8.1 9.5v9H5.2v-9h2.9zM6.6 4.9a1.7 1.7 0 110 3.4 1.7 1.7 0 010-3.4zM10 9.5h2.8v1.2c.4-.7 1.4-1.5 2.9-1.5 2.4 0 3.3 1.4 3.3 3.9v5.4h-2.9v-4.8c0-1.1-.4-1.9-1.4-1.9-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.8v4.9H10v-9z"/></svg></a>
               <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5.5" y="5.5" width="13" height="13" rx="4"/><circle cx="12" cy="12" r="3.2"/><circle cx="16.3" cy="7.7" r="1" fill="currentColor" stroke="none"/></svg></a>
             </div>
+            <div class="team-bio"><p>{{ m.bio }}</p></div>
           </div>
           <div class="team-plate">
-            <h3>{{ m.nome }}</h3>
-            <p>{{ m.cargo }}</p>
+            <div class="team-plate-txt"><h3>{{ m.nome }}</h3><p>{{ m.cargo }}</p></div>
+            <button class="team-toggle" onClick="{{ m.onToggle }}" aria-label="Ver bio">+</button>
           </div>
         </div>
       </sc-for>
@@ -385,6 +405,24 @@
   </div>
 </section>
 
+<!-- ===================== FAQ ===================== -->
+<section id="faq" style="padding:110px 0;background:#f4f6f6;">
+  <div style="max-width:1080px;margin:0 auto;padding:0 44px;">
+    <div style="text-align:center;max-width:680px;margin:0 auto 52px;">
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.faqEyebrow }}</span>
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,42px);line-height:1.16;color:#14454f;margin-top:14px;">{{ t.faqTitle }}</h2>
+    </div>
+    <div class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;gap:0 28px;">
+      <sc-for list="{{ faq }}" as="q" hint-placeholder-count="10">
+        <div class="faq-item {{ q.openCls }}">
+          <button class="faq-q" onClick="{{ q.onToggle }}"><span>{{ q.q }}</span><span class="faq-ic">+</span></button>
+          <div class="faq-a"><p>{{ q.a }}</p></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== CONTATO ===================== -->
 <section id="contato" style="padding:120px 0;background:#ffffff;">
   <div class="rcol-1" style="max-width:1300px;margin:0 auto;padding:0 44px;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
@@ -394,13 +432,13 @@
       <p style="font-size:15.5px;color:#5a6167;margin-top:18px;max-width:440px;">{{ t.contactText }}</p>
       <div style="display:flex;flex-direction:column;gap:18px;margin-top:36px;">
         <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 4h12v10H3z" stroke="currentColor" stroke-width="1.4"/><path d="M3 5l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblEmail }}</div><div style="font-size:15px;color:#14454f;font-weight:600;">geral@pvh.pt</div></div></div>
-        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 3h3l1.5 4L6.5 8.5a9 9 0 004 4L12 11l4 1.5V15c0 .6-.4 1-1 1A12 12 0 013 4c0-.6.4-1 1-1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblPhone }}</div><a href="tel:+35121000000" style="font-size:15px;color:#14454f;font-weight:600;text-decoration:none;">+351 21 000 0000</a></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 3h3l1.5 4L6.5 8.5a9 9 0 004 4L12 11l4 1.5V15c0 .6-.4 1-1 1A12 12 0 013 4c0-.6.4-1 1-1z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblPhone }}</div><a href="tel:+351214718810" style="font-size:15px;color:#14454f;font-weight:600;text-decoration:none;">+351 21 4718 810</a></div></div>
         <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M6 9.5c1 2 4 2 5-.5" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblWhats }}</div><a href="https://wa.me/351910000000" target="_blank" rel="noopener" style="font-size:15px;color:#14454f;font-weight:600;text-decoration:none;">+351 910 000 000</a></div></div>
-        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5c3 0 5.5 2.4 5.5 5.4C14.5 11 9 16.5 9 16.5S3.5 11 3.5 6.9C3.5 3.9 6 1.5 9 1.5z" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="9" cy="7" r="1.8" stroke="currentColor" stroke-width="1.4"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblAddr }}</div><div style="font-size:15px;color:#14454f;font-weight:600;">Av. da República, 50 — 1050-196 Lisboa, Portugal</div></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="width:38px;height:38px;flex-shrink:0;border:1px solid #d7dcdd;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#b08d4c;"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5c3 0 5.5 2.4 5.5 5.4C14.5 11 9 16.5 9 16.5S3.5 11 3.5 6.9C3.5 3.9 6 1.5 9 1.5z" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="9" cy="7" r="1.8" stroke="currentColor" stroke-width="1.4"/></svg></span><div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a9297;">{{ t.lblAddr }}</div><div style="font-size:15px;color:#14454f;font-weight:600;">Praceta do Comércio, Nº 11B — Quinta Grande, Alfragide</div></div></div>
       </div>
       <div style="margin-top:32px;aspect-ratio:16/7;border-radius:3px;overflow:hidden;border:1px solid #e4e8e9;position:relative;">
-        <iframe title="Mapa — Av. da República, Lisboa" src="https://www.openstreetmap.org/export/embed.html?bbox=-9.1585%2C38.7275%2C-9.1335%2C38.7435&amp;layer=mapnik&amp;marker=38.7355%2C-9.1465" style="width:100%;height:100%;border:0;display:block;" loading="lazy"></iframe>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+da+Rep%C3%BAblica+50%2C+Lisboa" target="_blank" rel="noopener" style="position:absolute;bottom:10px;right:10px;background:#14454f;color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11px;letter-spacing:.04em;padding:8px 14px;border-radius:2px;text-decoration:none;">{{ t.mapBtn }} ↗</a>
+        <iframe title="Mapa — Alfragide" src="https://www.openstreetmap.org/export/embed.html?bbox=-9.2235%2C38.7205%2C-9.1985%2C38.7355&amp;layer=mapnik&amp;marker=38.7278%2C-9.2110" style="width:100%;height:100%;border:0;display:block;" loading="lazy"></iframe>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Praceta+do+Com%C3%A9rcio+11B%2C+Quinta+Grande%2C+Alfragide" target="_blank" rel="noopener" style="position:absolute;bottom:10px;right:10px;background:#14454f;color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11px;letter-spacing:.04em;padding:8px 14px;border-radius:2px;text-decoration:none;">{{ t.mapBtn }} ↗</a>
       </div>
     </div>
     <div style="background:#f4f6f6;border:1px solid #e4e8e9;border-radius:3px;padding:44px;">
@@ -435,7 +473,7 @@
   <div class="rcol-2" style="max-width:1300px;margin:0 auto;padding:0 44px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;">
     <div>
       <div style="display:flex;align-items:center;gap:12px;">
-        <img src="imagens/PVH_logo.png" alt="PVH" style="height:40px;width:auto;display:block;">
+        <img src="imagens/PVH_logo_white.png" alt="PVH" style="height:40px;width:auto;display:block;">
       </div>
       <p style="font-size:13.5px;margin-top:20px;max-width:300px;line-height:1.7;">{{ t.footDesc }}</p>
       <div style="display:flex;gap:10px;margin-top:24px;">
@@ -466,9 +504,9 @@
     <div>
       <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:20px;">{{ t.footContact }}</div>
       <div style="display:flex;flex-direction:column;gap:11px;font-size:14px;">
-        <span>Av. da República, 50</span>
-        <span>1050-196 Lisboa · Portugal</span>
-        <a href="tel:+35121000000" style="color:rgba(255,255,255,.7);" style-hover="color:#d9c191;">+351 21 000 0000</a>
+        <span>Praceta do Comércio, Nº 11B</span>
+        <span>Quinta Grande · Alfragide</span>
+        <a href="tel:+351214718810" style="color:rgba(255,255,255,.7);" style-hover="color:#d9c191;">+351 21 4718 810</a>
         <a href="#contato" style="color:#d9c191;" style-hover="color:#fff;">geral@pvh.pt</a>
       </div>
     </div>
@@ -541,6 +579,8 @@ class Component extends DCLogic {
     factsIn: false,
     modalOpen: false,
     detail: null,
+    teamOpen: -1,
+    faqOpen: -1,
     submitted: false,
     dial: '+351',
     form: { nome:'', empresa:'', email:'', telefone:'', mensagem:'' },
@@ -578,7 +618,12 @@ class Component extends DCLogic {
   teamMeta = [
     { nome:'Eng. António Braga', photoId:'photo-1507003211169-0a1dd7228f2d' },
     { nome:'Eng. Paulo Ferreira', photoId:'photo-1500648767791-00dcc994a43e' },
-    { nome:'Eng.ª Juliana Reis', photoId:'photo-1544005313-94ddf0286df2' }
+    { nome:'Eng.ª Juliana Reis', photoId:'photo-1544005313-94ddf0286df2' },
+    { nome:'Eng.ª Marina Costa', photoId:'team-x2' },
+    { nome:'Eng. Ricardo Lopes', photoId:'team-x1' },
+    { nome:'Eng.ª Sofia Martins', photoId:'team-x4' },
+    { nome:'Eng. Tiago Nunes', photoId:'team-x3' },
+    { nome:'Eng. Bruno Alves', photoId:'team-x5' }
   ];
 
   i18n = {
@@ -594,6 +639,7 @@ class Component extends DCLogic {
         numGrandes:'Grandes', numNumeros:'Números',
         servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia', servLink:'Ver mais',
         projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver mais',
+        faqEyebrow:'Perguntas Frequentes', faqTitle:'Poderá Perguntar',
         timeEyebrow:'Linha do Tempo', timeTitle:'Duas décadas de crescimento constante',
         clientsEyebrow:'Clientes', clientsTitle:'A confiança de quem constrói o país',
         testEyebrow:'Testemunhos', testTitle:'O que dizem os nossos parceiros',
@@ -655,14 +701,27 @@ class Component extends DCLogic {
         {texto:'Uma consultoria que combina engenharia pesada com uma gestão de obra impecável. Parceria de longo prazo.',nome:'Renata Prado',empresa:'Gestora de Infraestruturas · ViaCargo'},
         {texto:'O domínio de BIM e a supervisão em obra elevaram muito a qualidade da entrega do nosso terminal multimodal.',nome:'Eduardo Lima',empresa:'Diretor-Geral · PortoVia'}
       ],
-      teamRole:['Diretor Técnico','Coord. de Obras','Coord. de BIM'],
-      teamSpec:['Via Permanente','Geotecnia','Projetos de Execução'],
+      teamRole:['Diretor Técnico','Coord. de Obras','Coord. de BIM','Gestora de Projetos','Eng. de Sinalização','Eng.ª de Ambiente','Eng. de Topografia','Eng. de Planeamento'],
+      teamSpec:['Via Permanente','Geotecnia','Projetos de Execução','Estruturas & Pontes','Sinalização & ERTMS','Ambiente & Licenciamento','Topografia & Geodesia','Planeamento & Custos'],
+      teamBio:['Fundador e Diretor Técnico, lidera a estratégia de engenharia da PVH há mais de 20 anos.','Coordenador de obras com vasta experiência em geotecnia e fundações complexas.','Responsável pela coordenação BIM e pelos projetos de execução da equipa.','Especialista em estruturas e pontes ferroviárias de grande vão.','Dedicado a sistemas de sinalização e controlo de tráfego ferroviário.','Assegura o licenciamento ambiental e a conformidade regulatória dos projetos.','Responsável por levantamentos topográficos e georreferenciação de alta precisão.','Gere cronogramas, orçamentos e o planeamento integrado das obras.'],
       proc:[
         {num:'1',titulo:'Contacto',desc:'Entendimento inicial da necessidade.'},
         {num:'2',titulo:'Estudo',desc:'Diagnóstico e viabilidade técnica.'},
         {num:'3',titulo:'Projeto',desc:'Desenvolvimento e pormenorização.'},
         {num:'4',titulo:'Execução',desc:'Acompanhamento e supervisão.'},
         {num:'5',titulo:'Entrega',desc:'Comissionamento e entrega final.'}
+      ],
+      faq:[
+        {q:'Que serviços de engenharia ferroviária oferecem?',a:'Projetos de via, estruturas, fiscalização, supervisão, consultoria e gestão de obras — do estudo prévio à entrega.'},
+        {q:'Trabalham com alta velocidade e metro?',a:'Sim. Atuamos em linhas convencionais, de alta velocidade, metropolitano e ligeiro.'},
+        {q:'Têm experiência com sistemas ERTMS/ETCS?',a:'Sim, integramos sinalização moderna e sistemas ERTMS/ETCS nos nossos projetos.'},
+        {q:'Fazem estudos de viabilidade e projeto?',a:'Realizamos estudos técnico-económicos, projeto base e projeto de execução completos.'},
+        {q:'Prestam serviços de fiscalização de obra?',a:'Sim, com controlo técnico, de qualidade e de conformidade normativa em campo.'},
+        {q:'Atuam apenas em Portugal?',a:'A nossa base é Portugal, mas desenvolvemos projetos e parcerias internacionais.'},
+        {q:'Como garantem a segurança dos projetos?',a:'Seguimos normas rigorosas, revisão por pares e verificação independente em todas as fases.'},
+        {q:'Integram critérios de sustentabilidade?',a:'Sim, consideramos eficiência, impacto ambiental e durabilidade em cada solução.'},
+        {q:'Podem acompanhar o projeto do início ao fim?',a:'Sim, oferecemos acompanhamento integral, do primeiro estudo ao comissionamento.'},
+        {q:'Como posso pedir uma proposta?',a:'Use o formulário de contacto ou fale connosco por telefone/WhatsApp — respondemos em 1 dia útil.'}
       ]
     },
     en: {
@@ -677,6 +736,7 @@ class Component extends DCLogic {
         numGrandes:'Key', numNumeros:'Figures',
         servEyebrow:'Services', servTitle:'A complete engineering portfolio', servLink:'See more',
         projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'See more',
+        faqEyebrow:'Frequently Asked Questions', faqTitle:'You Might Ask',
         timeEyebrow:'Timeline', timeTitle:'Two decades of steady growth',
         clientsEyebrow:'Clients', clientsTitle:'Trusted by those who build the country',
         testEyebrow:'Testimonials', testTitle:'What our partners say',
@@ -738,14 +798,27 @@ class Component extends DCLogic {
         {texto:'A consultancy that combines heavy engineering with impeccable works management. A long-term partnership.',nome:'Renata Prado',empresa:'Infrastructure Manager · ViaCargo'},
         {texto:'Their BIM expertise and on-site supervision greatly raised the delivery quality of our multimodal terminal.',nome:'Eduardo Lima',empresa:'General Manager · PortoVia'}
       ],
-      teamRole:['Technical Director','Works Coordinator','BIM Coordinator'],
-      teamSpec:['Permanent Way','Geotechnics','Detailed Design'],
+      teamRole:['Technical Director','Works Coordinator','BIM Coordinator','Project Manager','Signalling Engineer','Environmental Engineer','Survey Engineer','Planning Engineer'],
+      teamSpec:['Permanent Way','Geotechnics','Detailed Design','Structures & Bridges','Signalling & ERTMS','Environment & Licensing','Topography & Geodesy','Planning & Costs'],
+      teamBio:['Founder and Technical Director, leading PVH engineering strategy for over 20 years.','Works coordinator with broad experience in geotechnics and complex foundations.','Leads BIM coordination and the team detailed-design projects.','Specialist in long-span railway structures and bridges.','Focused on signalling and railway traffic control systems.','Ensures environmental licensing and regulatory compliance of projects.','Responsible for high-precision topographic surveys and georeferencing.','Manages schedules, budgets and integrated works planning.'],
       proc:[
         {num:'1',titulo:'Contact',desc:'Initial understanding of the need.'},
         {num:'2',titulo:'Study',desc:'Diagnosis and technical feasibility.'},
         {num:'3',titulo:'Design',desc:'Development and detailing.'},
         {num:'4',titulo:'Execution',desc:'Monitoring and supervision.'},
         {num:'5',titulo:'Delivery',desc:'Commissioning and final handover.'}
+      ],
+      faq:[
+        {q:'What railway engineering services do you offer?',a:'Track, structures, inspection, supervision, consulting and works management — from preliminary study to handover.'},
+        {q:'Do you work with high speed and metro?',a:'Yes. We work on conventional, high-speed, metro and light-rail lines.'},
+        {q:'Do you have experience with ERTMS/ETCS systems?',a:'Yes, we integrate modern signalling and ERTMS/ETCS systems in our projects.'},
+        {q:'Do you carry out feasibility studies and design?',a:'We deliver technical-economic studies, base design and full detailed design.'},
+        {q:'Do you provide works inspection services?',a:'Yes, with technical, quality and regulatory-compliance control on site.'},
+        {q:'Do you operate only in Portugal?',a:'Our base is Portugal, but we develop international projects and partnerships.'},
+        {q:'How do you ensure project safety?',a:'We follow strict standards, peer review and independent verification at every stage.'},
+        {q:'Do you integrate sustainability criteria?',a:'Yes, we consider efficiency, environmental impact and durability in every solution.'},
+        {q:'Can you follow the project from start to finish?',a:'Yes, we offer full support, from the first study to commissioning.'},
+        {q:'How can I request a proposal?',a:'Use the contact form or reach us by phone/WhatsApp — we reply within 1 business day.'}
       ]
     },
     es: {
@@ -760,6 +833,7 @@ class Component extends DCLogic {
         numGrandes:'Grandes', numNumeros:'Cifras',
         servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería', servLink:'Ver más',
         projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver más',
+        faqEyebrow:'Preguntas Frecuentes', faqTitle:'Podría Preguntar',
         timeEyebrow:'Cronología', timeTitle:'Dos décadas de crecimiento constante',
         clientsEyebrow:'Clientes', clientsTitle:'La confianza de quienes construyen el país',
         testEyebrow:'Testimonios', testTitle:'Lo que dicen nuestros socios',
@@ -821,14 +895,27 @@ class Component extends DCLogic {
         {texto:'Una consultoría que combina ingeniería pesada con una gestión de obra impecable. Una asociación a largo plazo.',nome:'Renata Prado',empresa:'Gerente de Infraestructuras · ViaCargo'},
         {texto:'El dominio de BIM y la supervisión en obra elevaron mucho la calidad de entrega de nuestra terminal multimodal.',nome:'Eduardo Lima',empresa:'Director General · PortoVia'}
       ],
-      teamRole:['Director Técnico','Coord. de Obras','Coord. de BIM'],
-      teamSpec:['Vía Permanente','Geotecnia','Proyectos de Ejecución'],
+      teamRole:['Director Técnico','Coord. de Obras','Coord. de BIM','Gerente de Proyectos','Ing. de Señalización','Ing.ª de Medio Ambiente','Ing. de Topografía','Ing. de Planificación'],
+      teamSpec:['Vía Permanente','Geotecnia','Proyectos de Ejecución','Estructuras y Puentes','Señalización & ERTMS','Medio Ambiente & Licencias','Topografía & Geodesia','Planificación & Costes'],
+      teamBio:['Fundador y Director Técnico, lidera la estrategia de ingeniería de PVH desde hace más de 20 años.','Coordinador de obras con amplia experiencia en geotecnia y cimentaciones complejas.','Responsable de la coordinación BIM y de los proyectos de ejecución del equipo.','Especialista en estructuras y puentes ferroviarios de gran vano.','Dedicado a sistemas de señalización y control de tráfico ferroviario.','Asegura las licencias ambientales y la conformidad regulatoria de los proyectos.','Responsable de levantamientos topográficos y georreferenciación de alta precisión.','Gestiona cronogramas, presupuestos y la planificación integrada de las obras.'],
       proc:[
         {num:'1',titulo:'Contacto',desc:'Comprensión inicial de la necesidad.'},
         {num:'2',titulo:'Estudio',desc:'Diagnóstico y viabilidad técnica.'},
         {num:'3',titulo:'Proyecto',desc:'Desarrollo y detalle.'},
         {num:'4',titulo:'Ejecución',desc:'Seguimiento y supervisión.'},
         {num:'5',titulo:'Entrega',desc:'Puesta en marcha y entrega final.'}
+      ],
+      faq:[
+        {q:'¿Qué servicios de ingeniería ferroviaria ofrecen?',a:'Vía, estructuras, inspección, supervisión, consultoría y gestión de obras — del estudio previo a la entrega.'},
+        {q:'¿Trabajan con alta velocidad y metro?',a:'Sí. Actuamos en líneas convencionales, de alta velocidad, metro y tren ligero.'},
+        {q:'¿Tienen experiencia con sistemas ERTMS/ETCS?',a:'Sí, integramos señalización moderna y sistemas ERTMS/ETCS en nuestros proyectos.'},
+        {q:'¿Realizan estudios de viabilidad y proyecto?',a:'Entregamos estudios técnico-económicos, proyecto base y proyecto de ejecución completos.'},
+        {q:'¿Prestan servicios de inspección de obra?',a:'Sí, con control técnico, de calidad y de conformidad normativa en campo.'},
+        {q:'¿Actúan solo en Portugal?',a:'Nuestra base es Portugal, pero desarrollamos proyectos y alianzas internacionales.'},
+        {q:'¿Cómo garantizan la seguridad de los proyectos?',a:'Seguimos normas estrictas, revisión por pares y verificación independiente en cada fase.'},
+        {q:'¿Integran criterios de sostenibilidad?',a:'Sí, consideramos eficiencia, impacto ambiental y durabilidad en cada solución.'},
+        {q:'¿Pueden acompañar el proyecto de principio a fin?',a:'Sí, ofrecemos acompañamiento integral, del primer estudio a la puesta en marcha.'},
+        {q:'¿Cómo puedo pedir una propuesta?',a:'Use el formulario de contacto o contáctenos por teléfono/WhatsApp — respondemos en 1 día hábil.'}
       ]
     }
   };
@@ -879,6 +966,8 @@ class Component extends DCLogic {
   toggleMenu() { this.setState(s => ({ menuOpen: !s.menuOpen })); }
   closeMenu() { this.setState({ menuOpen: false }); }
   teamScroll(dir) { const el = document.getElementById('team-scroll'); if (el) el.scrollBy({ left: dir * 340, behavior: 'smooth' }); }
+  toggleTeam(i) { this.setState(s => ({ teamOpen: s.teamOpen === i ? -1 : i })); }
+  toggleFaq(i) { this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i })); }
   setLang(l) { this.setState({ lang: l, menuOpen: false }); }
   setFilter(f) { this.setState({ filter: f }); }
   openModal() { this.setState({ modalOpen: true, submitted: false }); }
@@ -923,7 +1012,8 @@ class Component extends DCLogic {
       const img = U(SV[i % SV.length]), full = d.servFull[i];
       return { ...s, img, full, onOpen: () => this.openDetail({ img, title: s.nome, sub: '', text: full }) };
     });
-    const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], img: U(m.photoId), cardClass: '' }));
+    const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], bio: d.teamBio[i], img: U(m.photoId), cardClass: this.state.teamOpen === i ? 'is-open' : '', onToggle: () => this.toggleTeam(i) }));
+    const faq = d.faq.map((x, i) => ({ ...x, openCls: this.state.faqOpen === i ? 'open' : '', onToggle: () => this.toggleFaq(i) }));
 
     const f = this.state.form, er = this.state.errors;
 
@@ -955,6 +1045,7 @@ class Component extends DCLogic {
       filtros,
       projetos,
       timeline: d.time,
+      faq,
       clientesLoop: [...this.clientesData, ...this.clientesData],
       depoimentos: d.depo.map((x, i) => ({ ...x, foto: this.depoFotos[i] })),
       equipe,
