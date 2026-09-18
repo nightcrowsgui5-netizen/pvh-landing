@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+
+# Documentos internos (nao publicar - repositorio publico)
+imagens/*.pdf

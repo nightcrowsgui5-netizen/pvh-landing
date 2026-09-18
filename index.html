@@ -101,14 +101,8 @@
   .serv-ov{position:absolute;inset:0;background:rgba(36,54,118,.88);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;opacity:0;transition:opacity .35s ease;pointer-events:none;}
   .serv-ov p{font-size:13.5px;line-height:1.6;}
   .serv-card:hover .serv-ov{opacity:1;}
-  /* ===================== FAQ ===================== */
-  .faq-item{border:1px solid #e4e8e9;border-radius:3px;background:#fff;margin-bottom:14px;overflow:hidden;}
-  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:'Montserrat',sans-serif;font-weight:600;font-size:16.5px;color:#14454f;}
-  .faq-ic{flex:0 0 auto;color:#b08d4c;font-size:26px;line-height:1;transition:transform .3s;}
-  .faq-item.open .faq-ic{transform:rotate(45deg);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
-  .faq-a p{padding:0 22px 20px;font-size:15px;color:#6b7378;line-height:1.65;}
-  .faq-item.open .faq-a{max-height:260px;}
+  /* ===================== PROJETOS (cartao) ===================== */
+  .proj-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 </style>
 </helmet>
 
@@ -289,7 +283,7 @@
       <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.16;color:#14454f;margin-top:16px;">{{ t.servTitle }}</h2>
     </div>
     <div class="rcol-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;">
-      <sc-for list="{{ servicos }}" as="sv" hint-placeholder-count="12">
+      <sc-for list="{{ servicos }}" as="sv" hint-placeholder-count="4">
         <div class="serv-card" style="border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;background:#fff;transition:box-shadow .3s;" style-hover="box-shadow:0 18px 40px rgba(15,53,61,.1);">
           <div class="serv-imgwrap" style="aspect-ratio:3/2;overflow:hidden;position:relative;">
             <img src="{{ sv.img }}" alt="{{ sv.nome }}" onClick="{{ sv.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;">
@@ -314,24 +308,28 @@
       </div>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px;">
-      <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="6">
+      <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="5">
         <button onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
       </sc-for>
     </div>
     <div class="rcol-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;">
-      <sc-for list="{{ projetos }}" as="p" hint-placeholder-count="6">
-        <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(15,53,61,.14);">
+      <sc-for list="{{ projetos }}" as="p" hint-placeholder-count="9">
+        <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(15,53,61,.14);">
           <div style="position:relative;aspect-ratio:16/11;overflow:hidden;">
             <img src="{{ p.img }}" alt="{{ p.nome }}" onClick="{{ p.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;cursor:pointer;" style-hover="transform:scale(1.05);">
             <span style="position:absolute;top:14px;left:14px;background:rgba(20,69,79,.92);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:2px;">{{ p.categoria }}</span>
           </div>
-          <div style="padding:26px;">
+          <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
               <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#14454f;">{{ p.nome }}</h3>
-              <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;">{{ p.ano }}</span>
+              <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;white-space:nowrap;">{{ p.ano }}</span>
             </div>
-            <div style="font-size:12.5px;letter-spacing:.03em;color:#14454f;margin-top:6px;">{{ p.cidade }}</div>
-            <a onClick="{{ p.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
+            <p class="proj-desc" style="font-size:13.5px;line-height:1.6;color:#5a6167;margin-top:10px;">{{ p.desc }}</p>
+            <div style="display:flex;align-items:center;gap:7px;margin-top:14px;font-size:12.5px;letter-spacing:.03em;color:#14454f;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto;"><path d="M12 21.5s7-6.6 7-11.5a7 7 0 1 0-14 0c0 4.9 7 11.5 7 11.5z" stroke="#b08d4c" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="#b08d4c" stroke-width="1.8"/></svg>
+              {{ p.local }}
+            </div>
+            <a onClick="{{ p.onOpen }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.projLink }} <span style="font-size:15px;">→</span></a>
           </div>
         </div>
       </sc-for>
@@ -401,24 +399,6 @@
   <div style="position:relative;max-width:900px;margin:0 auto;padding:0 44px;text-align:center;">
     <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.14;color:#fff;letter-spacing:-.01em;text-wrap:balance;">{{ t.ctaTitle }}</h2>
     <p style="font-size:17px;color:rgba(255,255,255,.8);margin-top:22px;max-width:600px;margin-left:auto;margin-right:auto;">{{ t.ctaText }}</p>
-  </div>
-</section>
-
-<!-- ===================== FAQ ===================== -->
-<section id="faq" style="padding:110px 0;background:#f4f6f6;">
-  <div style="max-width:1080px;margin:0 auto;padding:0 44px;">
-    <div style="text-align:center;max-width:680px;margin:0 auto 52px;">
-      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:#b08d4c;">{{ t.faqEyebrow }}</span>
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(28px,3vw,42px);line-height:1.16;color:#14454f;margin-top:14px;">{{ t.faqTitle }}</h2>
-    </div>
-    <div class="rcol-1" style="display:grid;grid-template-columns:1fr 1fr;gap:0 28px;">
-      <sc-for list="{{ faq }}" as="q" hint-placeholder-count="10">
-        <div class="faq-item {{ q.openCls }}">
-          <button class="faq-q" onClick="{{ q.onToggle }}"><span>{{ q.q }}</span><span class="faq-ic">+</span></button>
-          <div class="faq-a"><p>{{ q.a }}</p></div>
-        </div>
-      </sc-for>
-    </div>
   </div>
 </section>
 
@@ -528,6 +508,24 @@
         <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:24px;line-height:1.2;color:#14454f;">{{ detail.title }}</h3>
         <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;margin-top:4px;">{{ detail.sub }}</div>
         <p style="font-size:15px;color:#5a6167;margin-top:16px;line-height:1.75;">{{ detail.text }}</p>
+        <sc-if value="{{ detail.hasMeta }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:22px;border-top:1px solid #e4e8e9;padding-top:18px;display:grid;gap:11px;">
+            <sc-if value="{{ detail.clientFull }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;line-height:1.55;">
+              <span style="min-width:118px;font-family:'Montserrat',sans-serif;font-weight:600;color:#14454f;">{{ t.projClient }}</span>
+              <span style="flex:1;min-width:190px;color:#5a6167;">{{ detail.clientFull }}</span>
+            </div>
+            </sc-if>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;line-height:1.55;">
+              <span style="min-width:118px;font-family:'Montserrat',sans-serif;font-weight:600;color:#14454f;">{{ t.projLocation }}</span>
+              <span style="flex:1;min-width:190px;color:#5a6167;">{{ detail.local }}</span>
+            </div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;line-height:1.55;">
+              <span style="min-width:118px;font-family:'Montserrat',sans-serif;font-weight:600;color:#14454f;">{{ t.projCategory }}</span>
+              <span style="flex:1;min-width:190px;color:#5a6167;">{{ detail.categoria }}</span>
+            </div>
+          </div>
+        </sc-if>
       </div>
     </div>
   </div>
@@ -579,7 +577,6 @@ class Component extends DCLogic {
     modalOpen: false,
     detail: null,
     teamOpen: -1,
-    faqOpen: -1,
     submitted: false,
     dial: '+351',
     form: { nome:'', empresa:'', email:'', telefone:'', mensagem:'' },
@@ -601,17 +598,58 @@ class Component extends DCLogic {
 
   depoFotos = ['imagens/depo-carlos.jpg','imagens/depo-renata.jpg','imagens/depo-eduardo.jpg'];
 
-  catKeys = ['all','ferrovia','pontes','viadutos','patios','especiais'];
+  catKeys = ['all','projetos','consultadoria','projfisc','formacao'];
 
+  /* Fonte: Projetos_PVH_03set2026.pdf — Principais Projetos/Serviços */
   projMeta = [
-    { cidade:'Vila Franca de Xira · Lisboa', ano:'2023', catKey:'ferrovia',  imgId:'photo-1431620828042-54af7f3a9e28' },
-    { cidade:'Santarém',                     ano:'2022', catKey:'viadutos',  imgId:'photo-1648487241125-2d7615f05778' },
-    { cidade:'Porto',                        ano:'2021', catKey:'pontes',    imgId:'photo-1689011615152-19262401b4bf' },
-    { cidade:'Sines · Setúbal',              ano:'2024', catKey:'patios',    imgId:'photo-1734279135113-8bd58bc02b69' },
-    { cidade:'Coimbra',                      ano:'2020', catKey:'especiais', imgId:'photo-1740968786460-e4cd129f98f1' },
-    { cidade:'Évora',                        ano:'2023', catKey:'ferrovia',  imgId:'photo-1734279135113-8bd58bc02b69' },
-    { cidade:'Braga',                        ano:'2019', catKey:'viadutos',  imgId:'photo-1740968786460-e4cd129f98f1' },
-    { cidade:'Guarda',                       ano:'2025', catKey:'especiais', imgId:'photo-1648487241125-2d7615f05778' }
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2021', catKey:'projetos', local:'Portugal',
+      designacao:'Projeto de execução da Estação da Pampilhosa — Modernização, 2.ª Fase.',
+      imgId:'photo-1431620828042-54af7f3a9e28' },
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2021', catKey:'projetos', local:'Portugal',
+      designacao:'Projeto de execução «Linha do Norte, Estação do Entroncamento — desdobramento transversal da junção dupla».',
+      imgId:'photo-1648487241125-2d7615f05778' },
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2022', catKey:'consultadoria', local:'Portugal',
+      designacao:'Elaboração de estudos para aplicação de via não balastrada na Rede Ferroviária Nacional.',
+      imgId:'photo-1689011615152-19262401b4bf' },
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2020–2023', catKey:'consultadoria', local:'Portugal',
+      designacao:'Assessoria técnica de apoio e análise a faseamentos construtivos e tecnologias de construção de via-férrea para o plano Ferrovia 2020.',
+      imgId:'photo-1734279135113-8bd58bc02b69' },
+    { cliente:'ADRVT', clienteFull:'Associação para o Desenvolvimento do Vale do Tua', ano:'2022', catKey:'consultadoria', local:'Portugal',
+      designacao:'Análise ao estado geral da Linha do Tua, troço Brunheda (21+189) – Cachão (41+866) – Mirandela (54+200) – Carvalhais (58+138).',
+      imgId:'photo-1740968786460-e4cd129f98f1' },
+    { cliente:'Somafel', clienteFull:'', ano:'2022', catKey:'consultadoria', local:'Portugal',
+      designacao:'Valorização do parque de equipamento pesado da Somafel, SA.',
+      imgId:'photo-1431620828042-54af7f3a9e28' },
+    { cliente:'Quadrante', clienteFull:'', ano:'2023', catKey:'consultadoria', local:'Portugal',
+      designacao:'Prestação de serviços para a elaboração do projeto T2019-323-21 Maradi–Kano–Dutse (Nigéria).',
+      imgId:'photo-1648487241125-2d7615f05778' },
+    { cliente:'Auto-Europa', clienteFull:'', ano:'2023', catKey:'consultadoria', local:'Portugal',
+      designacao:'Regulamento interno de circulação no parque das linhas da VW Autoeuropa (proposta).',
+      imgId:'photo-1689011615152-19262401b4bf' },
+    { cliente:'Betar', clienteFull:'', ano:'2023', catKey:'consultadoria', local:'Portugal',
+      designacao:'Linha Ressano Garcia (Moçambique) — estudo operacional e análise técnica de soluções para a duplicação da linha.',
+      imgId:'photo-1734279135113-8bd58bc02b69' },
+    { cliente:'APA', clienteFull:'Administração do Porto de Aveiro', ano:'2023', catKey:'projetos', local:'Portugal',
+      designacao:'Serviços especializados de acompanhamento, supervisão e revisão da alteração ao projeto ferroviário do Terminal Intermodal do Porto de Aveiro.',
+      imgId:'photo-1740968786460-e4cd129f98f1' },
+    { cliente:'Repsol-Sines', clienteFull:'', ano:'2023', catKey:'projfisc', local:'Portugal',
+      designacao:'Terminal ferroviário CIS e infraestruturas complementares — trabalhos complementares à engenharia de detalhe.',
+      imgId:'photo-1431620828042-54af7f3a9e28' },
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2024', catKey:'consultadoria', local:'Portugal',
+      designacao:'Assessoria técnica para apoio da especialidade via-férrea.',
+      imgId:'photo-1648487241125-2d7615f05778' },
+    { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2024', catKey:'projetos', local:'Portugal',
+      designacao:'Prestação de serviços para a elaboração do projeto de execução «L. Norte / L. Beira Alta — adaptação do faseamento da Estação da Pampilhosa».',
+      imgId:'photo-1689011615152-19262401b4bf' },
+    { cliente:'Tecnofisil', clienteFull:'', ano:'2025', catKey:'consultadoria', local:'Portugal',
+      designacao:'Apoio à coordenação geral e à revisão das opções de projeto no contexto da via-férrea e especialidades conexas, incluídos no projeto de execução «Linha do Douro – Pocinho – Barca d’Alva – Estudo Prévio + Projeto de Execução».',
+      imgId:'photo-1734279135113-8bd58bc02b69' },
+    { cliente:'AVAN', clienteFull:'Concessionária da Alta Velocidade — PPP 1', ano:'2025–2026', catKey:'consultadoria', local:'Portugal',
+      designacao:'Contrato para revisão do projeto relativo à concessão da linha ferroviária de alta velocidade entre Porto (Campanhã) e Oiã. Especialidades de via, catenária e infraestruturas de sinalização.',
+      imgId:'photo-1740968786460-e4cd129f98f1' },
+    { cliente:'ISEL', clienteFull:'Instituto Superior de Engenharia de Lisboa', ano:'2022 – …', catKey:'formacao', local:'Portugal',
+      designacao:'PGEEF — Pós-Graduação de Especialização em Engenharia Ferroviária.',
+      imgId:'photo-1431620828042-54af7f3a9e28' },
   ];
 
   teamMeta = [
@@ -632,13 +670,12 @@ class Component extends DCLogic {
         logoSub:'Engenharia Ferroviária',
         heroEyebrow:'Infraestrutura Ferroviária', heroTitle:'Engenharia Ferroviária para Grandes Projetos', heroText:'Planeamento, Projetos, Fiscalização, Supervisão, Consultoria e Gestão de Obras Ferroviárias.', heroBtn1:'Conheça os nossos serviços', heroBtn2:'Fale Connosco', heroScroll:'Deslize',
         aboutEyebrow:'Quem Somos', aboutTitle:'Engenharia de precisão para a infraestrutura que move o país', aboutP1:'A PVH é uma consultora de engenharia ferroviária que integra planeamento, projeto e gestão de obras numa única cadeia de valor. Combinamos rigor técnico, tecnologia BIM e experiência de terreno para entregar infraestrutura segura, durável e economicamente eficiente.', aboutP2:'Atuamos em ferrovias, pontes, viadutos, terminais e obras especiais, ao lado de operadores, construtoras e organismos públicos em todo o território nacional.', badgeText1:'anos a moldar', badgeText2:'a malha ferroviária',
-        missionTitle:'Missão', missionText:'Entregar soluções ferroviárias que unam segurança, eficiência e responsabilidade.', visionTitle:'Visão', visionText:'Ser referência nacional em engenharia e consultoria ferroviária de excelência.', valuesTitle:'Valores', valuesText:'Ética, precisão técnica, segurança absoluta e compromisso com o prazo.',
+        missionTitle:'Missão', missionText:'Contribuir para o desenvolvimento da engenharia ferroviária em Portugal, partilhando conhecimento e soluções que acrescentem valor para os nossos Clientes e Parceiros.', visionTitle:'Visão', visionText:'Consolidar a PVH como principal referência da engenharia nacional enquanto empresa altamente especializada no sector das infraestruturas ferroviárias.', valuesTitle:'Principais Valores', valuesText:'Ética, profissionalismo, trabalho em equipa e relação com o Cliente.',
         diffEyebrow:'Grandes Diferenciais', diffTitle:'Competências que sustentam grandes obras',
         d1t:'Engenharia Ferroviária', d1d:'Projetos de via permanente, geometria e superestrutura com padrão internacional.', d2t:'Gestão de Obras', d2d:'Planeamento, controlo de prazos, custos e qualidade do estaleiro à entrega.', d3t:'Supervisão Técnica', d3d:'Fiscalização e acompanhamento contínuo garantindo conformidade normativa.', d4t:'Consultoria Especializada', d4d:'Assessoria estratégica em viabilidade, licenciamento e otimização de traçados.', d5t:'Projetos de Execução', d5d:'Pormenorização completa em BIM pronta para execução, com precisão milimétrica.', d6t:'Estudos de Viabilidade', d6d:'Análises técnico-económicas que fundamentam decisões de investimento.',
         numGrandes:'Grandes', numNumeros:'Números',
         servEyebrow:'Serviços', servTitle:'Um portfólio completo de engenharia', servLink:'Ver mais',
-        projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver mais',
-        faqEyebrow:'Perguntas Frequentes', faqTitle:'Poderá Perguntar',
+        projEyebrow:'Projetos', projTitle:'Obras que conectam o país', projLink:'Ver mais', projClient:'Cliente', projLocation:'Localização', projCategory:'Categorização',
         timeEyebrow:'Linha do Tempo', timeTitle:'Duas décadas de crescimento constante',
         clientsEyebrow:'Clientes', clientsTitle:'A confiança de quem constrói o país',
         testEyebrow:'Testemunhos', testTitle:'O que dizem os nossos parceiros',
@@ -655,38 +692,18 @@ class Component extends DCLogic {
       },
       statLabel:['Projetos','Experiência','Equipa','Cobertura','Via-Férrea','Qualidade'],
       statCap:['Entregues com sucesso','Anos de atividade','Profissionais dedicados','Distritos atendidos','Projetada e supervisionada','Clientes satisfeitos'],
-      catLabels:['Todos','Ferrovia','Pontes','Viadutos','Pátios','Obras Especiais'],
+      catLabels:['Todos','Projetos','Consultadoria','Projetos e Fiscalização','Formação Profissional'],
       serv:[
-        {nome:'Projetos Ferroviários',desc:'Conceção e pormenorização de via permanente e superestrutura.'},
-        {nome:'Fiscalização',desc:'Controlo técnico e de conformidade em obra.'},
-        {nome:'Gestão de Obras',desc:'Gestão integrada de prazo, custo e qualidade.'},
-        {nome:'Consultoria Técnica',desc:'Apoio especializado em todas as fases do projeto.'},
-        {nome:'Levantamentos',desc:'Recolha de dados de campo com elevada precisão.'},
-        {nome:'Topografia',desc:'Georreferenciação e modelação do terreno.'},
-        {nome:'Geotecnia',desc:'Estudos de solo, fundações e estabilidade.'},
-        {nome:'Planeamento',desc:'Cronogramas, orçamentos e sequenciamento de obra.'},
-        {nome:'Licenciamento',desc:'Condução de processos ambientais e regulatórios.'},
-        {nome:'Inspeções',desc:'Avaliação estrutural e diagnóstico de ativos.'},
-        {nome:'Sinalização',desc:'Sistemas de sinalização e controlo de tráfego.'},
-        {nome:'Infraestrutura',desc:'Terraplenagens, drenagem e obras de arte.'}
-      ],
-      projNome:['Modernização da Linha do Norte','Viaduto do Vale do Tejo','Ponte Ferroviária do Douro','Terminal Multimodal do Sul','Variante Ferroviária','Ramal de Mercadorias do Alentejo','Viaduto Metropolitano','Túnel da Serra da Estrela'],
-      projDesc:['Projeto de execução de 180 km de via de mercadorias.','Viaduto ferroviário sobre corredor urbano.','Ponte ferroviária de grande vão em betão.','Parque de manobras e transbordo de mercadorias.','Desvio de traçado com túneis e trincheiras.','Ramal para escoamento de produção agrícola.','Estrutura elevada sobre malha urbana densa.','Travessia em maciço rochoso de 2,4 km.'],
-      projFull:[
-        'Projeto de execução para a modernização de 180 km de via de mercadorias, incluindo renovação de superestrutura, drenagem e obras de arte correntes. Toda a intervenção foi coordenada com a operação ferroviária para minimizar interrupções ao serviço.',
-        'Conceção e projeto de um viaduto ferroviário sobre um corredor urbano, com vãos otimizados para reduzir o impacto no tecido existente. Solução em betão pré-esforçado com foco em durabilidade e manutenção reduzida.',
-        'Ponte ferroviária de grande vão em betão sobre o rio Douro, dimensionada para tráfego misto. Incluiu estudo hidráulico, fundações profundas e um faseamento construtivo detalhado.',
-        'Parque de manobras e transbordo de mercadorias, integrando via, pavimentos e sistemas de movimentação de carga. O layout foi orientado à eficiência operacional e à expansão futura.',
-        'Desvio de traçado com túneis e trincheiras para contornar uma zona urbana sensível, melhorando geometria e velocidade. Envolveu coordenação geotécnica e ambiental ao longo de todo o corredor.',
-        'Ramal para escoamento de produção agrícola, ligando os polos produtores à rede principal. Incluiu projeto de via, sinalização e acessos rodoferroviários.',
-        'Estrutura elevada sobre malha urbana densa, com especial atenção ao ruído, vibração e integração paisagística. A construção foi faseada para minimizar a perturbação do trânsito local.',
-        'Travessia em maciço rochoso de 2,4 km, com estudo geológico-geotécnico aprofundado e sistemas de ventilação e segurança. Uma solução robusta para as exigentes condições de montanha.'
+        {nome:'Consultadoria',desc:'Consultadoria especializada.'},
+        {nome:'Projetos',desc:'Projetos de via-férrea, catenária e infraestruturas de sinalização.'},
+        {nome:'Fiscalização',desc:'Fiscalização de obras e empreendimentos.'},
+        {nome:'Formação',desc:'Formação Profissional.'}
       ],
       servFull:[
-        'Conceção e pormenorização de via permanente, geometria e superestrutura, do estudo prévio ao projeto de execução. Entregamos soluções normalizadas, otimizadas e prontas para obra.',
-        'Controlo técnico e de conformidade em obra, assegurando o cumprimento de normas, prazos e qualidade. Com relatórios periódicos e acompanhamento contínuo em campo.',
-        'Gestão integrada de prazo, custo e qualidade, do estaleiro à entrega. Inclui planeamento, coordenação de equipas e controlo de desvios em tempo real.',
-        'Apoio especializado em todas as fases do projeto, de estudos de viabilidade à otimização de traçados e licenciamento. Aconselhamento independente e baseado em dados.'
+        'Consultadoria especializada.',
+        'Projetos de via-férrea, catenária e infraestruturas de sinalização.',
+        'Fiscalização de obras e empreendimentos.',
+        'Formação Profissional.'
       ],
       time:[
         {ano:'2005',titulo:'Fundação',desc:'Início da atividade em consultoria ferroviária.'},
@@ -710,18 +727,6 @@ class Component extends DCLogic {
         {num:'4',titulo:'Execução',desc:'Acompanhamento e supervisão.'},
         {num:'5',titulo:'Entrega',desc:'Comissionamento e entrega final.'}
       ],
-      faq:[
-        {q:'Que serviços de engenharia ferroviária oferecem?',a:'Projetos de via, estruturas, fiscalização, supervisão, consultoria e gestão de obras — do estudo prévio à entrega.'},
-        {q:'Trabalham com alta velocidade e metro?',a:'Sim. Atuamos em linhas convencionais, de alta velocidade, metropolitano e ligeiro.'},
-        {q:'Têm experiência com sistemas ERTMS/ETCS?',a:'Sim, integramos sinalização moderna e sistemas ERTMS/ETCS nos nossos projetos.'},
-        {q:'Fazem estudos de viabilidade e projeto?',a:'Realizamos estudos técnico-económicos, projeto base e projeto de execução completos.'},
-        {q:'Prestam serviços de fiscalização de obra?',a:'Sim, com controlo técnico, de qualidade e de conformidade normativa em campo.'},
-        {q:'Atuam apenas em Portugal?',a:'A nossa base é Portugal, mas desenvolvemos projetos e parcerias internacionais.'},
-        {q:'Como garantem a segurança dos projetos?',a:'Seguimos normas rigorosas, revisão por pares e verificação independente em todas as fases.'},
-        {q:'Integram critérios de sustentabilidade?',a:'Sim, consideramos eficiência, impacto ambiental e durabilidade em cada solução.'},
-        {q:'Podem acompanhar o projeto do início ao fim?',a:'Sim, oferecemos acompanhamento integral, do primeiro estudo ao comissionamento.'},
-        {q:'Como posso pedir uma proposta?',a:'Use o formulário de contacto ou fale connosco por telefone/WhatsApp — respondemos em 1 dia útil.'}
-      ]
     },
     en: {
       ui: {
@@ -729,13 +734,12 @@ class Component extends DCLogic {
         logoSub:'Railway Engineering',
         heroEyebrow:'Railway Infrastructure', heroTitle:'Railway Engineering for Major Projects', heroText:'Planning, Design, Inspection, Supervision, Consulting and Railway Works Management.', heroBtn1:'Explore our services', heroBtn2:'Get in Touch', heroScroll:'Scroll',
         aboutEyebrow:'About Us', aboutTitle:'Precision engineering for the infrastructure that moves the country', aboutP1:'PVH is a railway engineering consultancy that integrates planning, design and works management into a single value chain. We combine technical rigour, BIM technology and field experience to deliver safe, durable and cost-efficient infrastructure.', aboutP2:'We operate across railways, bridges, viaducts, terminals and special works, alongside operators, contractors and public bodies throughout the country.', badgeText1:'years shaping', badgeText2:'the railway network',
-        missionTitle:'Mission', missionText:'To deliver railway solutions that combine safety, efficiency and responsibility.', visionTitle:'Vision', visionText:'To be a national benchmark in engineering and railway consultancy of excellence.', valuesTitle:'Values', valuesText:'Ethics, technical precision, absolute safety and commitment to deadlines.',
+        missionTitle:'Mission', missionText:'To contribute to the development of railway engineering in Portugal, sharing knowledge and solutions that add value for our Clients and Partners.', visionTitle:'Vision', visionText:'To establish PVH as the leading reference in national engineering, as a highly specialised company in the railway infrastructure sector.', valuesTitle:'Core Values', valuesText:'Ethics, professionalism, teamwork and client relationships.',
         diffEyebrow:'Key Strengths', diffTitle:'Capabilities that support major works',
         d1t:'Railway Engineering', d1d:'Permanent way, geometry and superstructure design to international standards.', d2t:'Works Management', d2d:'Planning and control of schedule, cost and quality from site to handover.', d3t:'Technical Supervision', d3d:'Inspection and continuous monitoring ensuring regulatory compliance.', d4t:'Specialised Consulting', d4d:'Strategic advice on feasibility, licensing and alignment optimisation.', d5t:'Detailed Design', d5d:'Complete BIM detailing ready for execution, with millimetric precision.', d6t:'Feasibility Studies', d6d:'Technical and economic analyses that support investment decisions.',
         numGrandes:'Key', numNumeros:'Figures',
         servEyebrow:'Services', servTitle:'A complete engineering portfolio', servLink:'See more',
-        projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'See more',
-        faqEyebrow:'Frequently Asked Questions', faqTitle:'You Might Ask',
+        projEyebrow:'Projects', projTitle:'Works that connect the country', projLink:'See more', projClient:'Client', projLocation:'Location', projCategory:'Category',
         timeEyebrow:'Timeline', timeTitle:'Two decades of steady growth',
         clientsEyebrow:'Clients', clientsTitle:'Trusted by those who build the country',
         testEyebrow:'Testimonials', testTitle:'What our partners say',
@@ -752,38 +756,18 @@ class Component extends DCLogic {
       },
       statLabel:['Projects','Experience','Team','Coverage','Track','Quality'],
       statCap:['Delivered successfully','Years in business','Dedicated professionals','Districts served','Designed and supervised','Satisfied clients'],
-      catLabels:['All','Railway','Bridges','Viaducts','Yards','Special Works'],
+      catLabels:['All','Design','Consultancy','Design & Inspection','Professional Training'],
       serv:[
-        {nome:'Railway Design',desc:'Concept and detailing of permanent way and superstructure.'},
-        {nome:'Inspection',desc:'Technical and compliance control on site.'},
-        {nome:'Works Management',desc:'Integrated management of schedule, cost and quality.'},
-        {nome:'Technical Consulting',desc:'Specialised support across all project phases.'},
-        {nome:'Surveys',desc:'High-precision field data collection.'},
-        {nome:'Topography',desc:'Georeferencing and terrain modelling.'},
-        {nome:'Geotechnics',desc:'Soil, foundation and stability studies.'},
-        {nome:'Planning',desc:'Schedules, budgets and works sequencing.'},
-        {nome:'Licensing',desc:'Handling of environmental and regulatory processes.'},
-        {nome:'Inspections',desc:'Structural assessment and asset diagnostics.'},
-        {nome:'Signalling',desc:'Signalling and traffic control systems.'},
-        {nome:'Infrastructure',desc:'Earthworks, drainage and engineering structures.'}
-      ],
-      projNome:['Northern Line Modernisation','Tagus Valley Viaduct','Douro Railway Bridge','Southern Multimodal Terminal','Railway Bypass','Alentejo Freight Branch','Metropolitan Viaduct','Serra da Estrela Tunnel'],
-      projDesc:['Detailed design of 180 km of freight line.','Railway viaduct over an urban corridor.','Long-span railway bridge in concrete.','Shunting yard and freight transhipment.','Alignment diversion with tunnels and cuttings.','Branch line for agricultural output flow.','Elevated structure over a dense urban network.','2.4 km crossing through a rock massif.'],
-      projFull:[
-        'Detailed design for the modernisation of 180 km of freight line, including superstructure renewal, drainage and standard engineering structures. The work was coordinated with railway operations to minimise service disruption.',
-        'Design of a railway viaduct over an urban corridor, with spans optimised to reduce the impact on the existing fabric. A prestressed-concrete solution focused on durability and low maintenance.',
-        'Long-span concrete railway bridge over the Douro river, designed for mixed traffic. It included hydraulic studies, deep foundations and a detailed construction sequence.',
-        'Shunting yard and freight transhipment facility, integrating track, pavements and cargo-handling systems. The layout was geared towards operational efficiency and future expansion.',
-        'Alignment diversion with tunnels and cuttings to bypass a sensitive urban area, improving geometry and speed. It involved geotechnical and environmental coordination along the whole corridor.',
-        'Branch line for agricultural output flow, connecting production hubs to the main network. It covered track design, signalling and road-rail access.',
-        'Elevated structure over a dense urban network, with particular attention to noise, vibration and landscape integration. Construction was phased to minimise disruption to local traffic.',
-        '2.4 km crossing through a rock massif, with in-depth geological-geotechnical study and ventilation and safety systems. A robust solution for demanding mountain conditions.'
+        {nome:'Consultancy',desc:'Specialised consultancy.'},
+        {nome:'Design',desc:'Track, catenary and signalling infrastructure design.'},
+        {nome:'Inspection',desc:'Inspection of works and developments.'},
+        {nome:'Training',desc:'Professional training.'}
       ],
       servFull:[
-        'Design and detailing of permanent way, geometry and superstructure, from preliminary study to detailed design. We deliver standardised, optimised, construction-ready solutions.',
-        'Technical and compliance control on site, ensuring adherence to standards, deadlines and quality. With periodic reports and continuous field monitoring.',
-        'Integrated management of schedule, cost and quality, from site to handover. Includes planning, team coordination and real-time deviation control.',
-        'Specialised support across all project phases, from feasibility studies to alignment optimisation and licensing. Independent, data-driven advice.'
+        'Specialised consultancy.',
+        'Track, catenary and signalling infrastructure design.',
+        'Inspection of works and developments.',
+        'Professional training.'
       ],
       time:[
         {ano:'2005',titulo:'Foundation',desc:'Start of railway consultancy activity.'},
@@ -807,18 +791,6 @@ class Component extends DCLogic {
         {num:'4',titulo:'Execution',desc:'Monitoring and supervision.'},
         {num:'5',titulo:'Delivery',desc:'Commissioning and final handover.'}
       ],
-      faq:[
-        {q:'What railway engineering services do you offer?',a:'Track, structures, inspection, supervision, consulting and works management — from preliminary study to handover.'},
-        {q:'Do you work with high speed and metro?',a:'Yes. We work on conventional, high-speed, metro and light-rail lines.'},
-        {q:'Do you have experience with ERTMS/ETCS systems?',a:'Yes, we integrate modern signalling and ERTMS/ETCS systems in our projects.'},
-        {q:'Do you carry out feasibility studies and design?',a:'We deliver technical-economic studies, base design and full detailed design.'},
-        {q:'Do you provide works inspection services?',a:'Yes, with technical, quality and regulatory-compliance control on site.'},
-        {q:'Do you operate only in Portugal?',a:'Our base is Portugal, but we develop international projects and partnerships.'},
-        {q:'How do you ensure project safety?',a:'We follow strict standards, peer review and independent verification at every stage.'},
-        {q:'Do you integrate sustainability criteria?',a:'Yes, we consider efficiency, environmental impact and durability in every solution.'},
-        {q:'Can you follow the project from start to finish?',a:'Yes, we offer full support, from the first study to commissioning.'},
-        {q:'How can I request a proposal?',a:'Use the contact form or reach us by phone/WhatsApp — we reply within 1 business day.'}
-      ]
     },
     es: {
       ui: {
@@ -826,13 +798,12 @@ class Component extends DCLogic {
         logoSub:'Ingeniería Ferroviaria',
         heroEyebrow:'Infraestructura Ferroviaria', heroTitle:'Ingeniería Ferroviaria para Grandes Proyectos', heroText:'Planificación, Proyectos, Inspección, Supervisión, Consultoría y Gestión de Obras Ferroviarias.', heroBtn1:'Conozca nuestros servicios', heroBtn2:'Contáctenos', heroScroll:'Desliza',
         aboutEyebrow:'Quiénes Somos', aboutTitle:'Ingeniería de precisión para la infraestructura que mueve el país', aboutP1:'PVH es una consultora de ingeniería ferroviaria que integra planificación, proyecto y gestión de obras en una única cadena de valor. Combinamos rigor técnico, tecnología BIM y experiencia de campo para entregar infraestructura segura, duradera y económicamente eficiente.', aboutP2:'Actuamos en ferrocarriles, puentes, viaductos, terminales y obras especiales, junto a operadores, constructoras y organismos públicos en todo el territorio nacional.', badgeText1:'años moldeando', badgeText2:'la red ferroviaria',
-        missionTitle:'Misión', missionText:'Entregar soluciones ferroviarias que unan seguridad, eficiencia y responsabilidad.', visionTitle:'Visión', visionText:'Ser referencia nacional en ingeniería y consultoría ferroviaria de excelencia.', valuesTitle:'Valores', valuesText:'Ética, precisión técnica, seguridad absoluta y compromiso con los plazos.',
+        missionTitle:'Misión', missionText:'Contribuir al desarrollo de la ingeniería ferroviaria en Portugal, compartiendo conocimiento y soluciones que aporten valor a nuestros Clientes y Socios.', visionTitle:'Visión', visionText:'Consolidar a PVH como principal referencia de la ingeniería nacional, como empresa altamente especializada en el sector de las infraestructuras ferroviarias.', valuesTitle:'Valores Principales', valuesText:'Ética, profesionalidad, trabajo en equipo y relación con el Cliente.',
         diffEyebrow:'Grandes Diferenciales', diffTitle:'Competencias que sostienen grandes obras',
         d1t:'Ingeniería Ferroviaria', d1d:'Proyectos de vía permanente, geometría y superestructura con estándar internacional.', d2t:'Gestión de Obras', d2d:'Planificación y control de plazos, costes y calidad desde la obra hasta la entrega.', d3t:'Supervisión Técnica', d3d:'Inspección y seguimiento continuo garantizando la conformidad normativa.', d4t:'Consultoría Especializada', d4d:'Asesoría estratégica en viabilidad, licencias y optimización de trazados.', d5t:'Proyectos de Ejecución', d5d:'Detalle completo en BIM listo para ejecución, con precisión milimétrica.', d6t:'Estudios de Viabilidad', d6d:'Análisis técnico-económicos que fundamentan decisiones de inversión.',
         numGrandes:'Grandes', numNumeros:'Cifras',
         servEyebrow:'Servicios', servTitle:'Un portafolio completo de ingeniería', servLink:'Ver más',
-        projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver más',
-        faqEyebrow:'Preguntas Frecuentes', faqTitle:'Podría Preguntar',
+        projEyebrow:'Proyectos', projTitle:'Obras que conectan el país', projLink:'Ver más', projClient:'Cliente', projLocation:'Ubicación', projCategory:'Categorización',
         timeEyebrow:'Cronología', timeTitle:'Dos décadas de crecimiento constante',
         clientsEyebrow:'Clientes', clientsTitle:'La confianza de quienes construyen el país',
         testEyebrow:'Testimonios', testTitle:'Lo que dicen nuestros socios',
@@ -849,38 +820,18 @@ class Component extends DCLogic {
       },
       statLabel:['Proyectos','Experiencia','Equipo','Cobertura','Vía Férrea','Calidad'],
       statCap:['Entregados con éxito','Años de actividad','Profesionales dedicados','Distritos atendidos','Proyectada y supervisada','Clientes satisfechos'],
-      catLabels:['Todos','Ferrocarril','Puentes','Viaductos','Patios','Obras Especiales'],
+      catLabels:['Todos','Proyectos','Consultoría','Proyectos y Fiscalización','Formación Profesional'],
       serv:[
-        {nome:'Proyectos Ferroviarios',desc:'Concepción y detalle de vía permanente y superestructura.'},
-        {nome:'Inspección',desc:'Control técnico y de conformidad en obra.'},
-        {nome:'Gestión de Obras',desc:'Gestión integrada de plazo, coste y calidad.'},
-        {nome:'Consultoría Técnica',desc:'Apoyo especializado en todas las fases del proyecto.'},
-        {nome:'Levantamientos',desc:'Recogida de datos de campo con alta precisión.'},
-        {nome:'Topografía',desc:'Georreferenciación y modelado del terreno.'},
-        {nome:'Geotecnia',desc:'Estudios de suelo, cimentaciones y estabilidad.'},
-        {nome:'Planificación',desc:'Cronogramas, presupuestos y secuenciación de obra.'},
-        {nome:'Licencias',desc:'Conducción de procesos ambientales y regulatorios.'},
-        {nome:'Inspecciones',desc:'Evaluación estructural y diagnóstico de activos.'},
-        {nome:'Señalización',desc:'Sistemas de señalización y control de tráfico.'},
-        {nome:'Infraestructura',desc:'Explanaciones, drenaje y obras de arte.'}
-      ],
-      projNome:['Modernización de la Línea del Norte','Viaducto del Valle del Tajo','Puente Ferroviario del Duero','Terminal Multimodal del Sur','Variante Ferroviaria','Ramal de Mercancías del Alentejo','Viaducto Metropolitano','Túnel de la Sierra de la Estrella'],
-      projDesc:['Proyecto de ejecución de 180 km de vía de mercancías.','Viaducto ferroviario sobre corredor urbano.','Puente ferroviario de gran vano en hormigón.','Patio de maniobras y transbordo de mercancías.','Desvío de trazado con túneles y trincheras.','Ramal para evacuación de producción agrícola.','Estructura elevada sobre malla urbana densa.','Travesía en macizo rocoso de 2,4 km.'],
-      projFull:[
-        'Proyecto de ejecución para la modernización de 180 km de vía de mercancías, incluyendo renovación de superestructura, drenaje y obras de arte corrientes. Toda la intervención se coordinó con la operación ferroviaria para minimizar interrupciones del servicio.',
-        'Concepción y proyecto de un viaducto ferroviario sobre un corredor urbano, con vanos optimizados para reducir el impacto en el tejido existente. Solución en hormigón pretensado centrada en durabilidad y mantenimiento reducido.',
-        'Puente ferroviario de gran vano en hormigón sobre el río Duero, dimensionado para tráfico mixto. Incluyó estudio hidráulico, cimentaciones profundas y una secuenciación constructiva detallada.',
-        'Patio de maniobras y transbordo de mercancías, integrando vía, pavimentos y sistemas de manipulación de carga. El diseño se orientó a la eficiencia operativa y a la expansión futura.',
-        'Desvío de trazado con túneles y trincheras para rodear una zona urbana sensible, mejorando geometría y velocidad. Implicó coordinación geotécnica y ambiental a lo largo de todo el corredor.',
-        'Ramal para evacuación de producción agrícola, conectando los polos productores con la red principal. Incluyó proyecto de vía, señalización y accesos carretera-ferrocarril.',
-        'Estructura elevada sobre malla urbana densa, con especial atención al ruido, la vibración y la integración paisajística. La construcción fue por fases para minimizar la perturbación del tráfico local.',
-        'Travesía en macizo rocoso de 2,4 km, con estudio geológico-geotécnico en profundidad y sistemas de ventilación y seguridad. Una solución robusta para exigentes condiciones de montaña.'
+        {nome:'Consultoría',desc:'Consultoría especializada.'},
+        {nome:'Proyectos',desc:'Proyectos de vía férrea, catenaria e infraestructuras de señalización.'},
+        {nome:'Fiscalización',desc:'Fiscalización de obras y proyectos.'},
+        {nome:'Formación',desc:'Formación Profesional.'}
       ],
       servFull:[
-        'Concepción y detalle de vía permanente, geometría y superestructura, del estudio previo al proyecto de ejecución. Entregamos soluciones normalizadas, optimizadas y listas para obra.',
-        'Control técnico y de conformidad en obra, asegurando el cumplimiento de normas, plazos y calidad. Con informes periódicos y seguimiento continuo en campo.',
-        'Gestión integrada de plazo, coste y calidad, de la obra a la entrega. Incluye planificación, coordinación de equipos y control de desviaciones en tiempo real.',
-        'Apoyo especializado en todas las fases del proyecto, de estudios de viabilidad a la optimización de trazados y licencias. Asesoramiento independiente y basado en datos.'
+        'Consultoría especializada.',
+        'Proyectos de vía férrea, catenaria e infraestructuras de señalización.',
+        'Fiscalización de obras y proyectos.',
+        'Formación Profesional.'
       ],
       time:[
         {ano:'2005',titulo:'Fundación',desc:'Inicio de la actividad en consultoría ferroviaria.'},
@@ -904,18 +855,6 @@ class Component extends DCLogic {
         {num:'4',titulo:'Ejecución',desc:'Seguimiento y supervisión.'},
         {num:'5',titulo:'Entrega',desc:'Puesta en marcha y entrega final.'}
       ],
-      faq:[
-        {q:'¿Qué servicios de ingeniería ferroviaria ofrecen?',a:'Vía, estructuras, inspección, supervisión, consultoría y gestión de obras — del estudio previo a la entrega.'},
-        {q:'¿Trabajan con alta velocidad y metro?',a:'Sí. Actuamos en líneas convencionales, de alta velocidad, metro y tren ligero.'},
-        {q:'¿Tienen experiencia con sistemas ERTMS/ETCS?',a:'Sí, integramos señalización moderna y sistemas ERTMS/ETCS en nuestros proyectos.'},
-        {q:'¿Realizan estudios de viabilidad y proyecto?',a:'Entregamos estudios técnico-económicos, proyecto base y proyecto de ejecución completos.'},
-        {q:'¿Prestan servicios de inspección de obra?',a:'Sí, con control técnico, de calidad y de conformidad normativa en campo.'},
-        {q:'¿Actúan solo en Portugal?',a:'Nuestra base es Portugal, pero desarrollamos proyectos y alianzas internacionales.'},
-        {q:'¿Cómo garantizan la seguridad de los proyectos?',a:'Seguimos normas estrictas, revisión por pares y verificación independiente en cada fase.'},
-        {q:'¿Integran criterios de sostenibilidad?',a:'Sí, consideramos eficiencia, impacto ambiental y durabilidad en cada solución.'},
-        {q:'¿Pueden acompañar el proyecto de principio a fin?',a:'Sí, ofrecemos acompañamiento integral, del primer estudio a la puesta en marcha.'},
-        {q:'¿Cómo puedo pedir una propuesta?',a:'Use el formulario de contacto o contáctenos por teléfono/WhatsApp — respondemos en 1 día hábil.'}
-      ]
     }
   };
 
@@ -976,7 +915,6 @@ class Component extends DCLogic {
     }
   }
   toggleTeam(i) { this.setState(s => ({ teamOpen: s.teamOpen === i ? -1 : i })); }
-  toggleFaq(i) { this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i })); }
   setLang(l) { this.setState({ lang: l, menuOpen: false }); }
   setFilter(f) { this.setState({ filter: f }); }
   openModal() { this.setState({ modalOpen: true, submitted: false }); }
@@ -1010,10 +948,14 @@ class Component extends DCLogic {
       };
     });
     const U = (id) => `imagens/${id}.jpg`;
-    const projAll = this.projMeta.map((m, i) => {
-      const img = U(m.imgId), nome = d.projNome[i], full = d.projFull[i], ano = m.ano;
-      return { ...m, nome, desc: d.projDesc[i], full, categoria: d.catLabels[this.catKeys.indexOf(m.catKey)], img,
-        onOpen: () => this.openDetail({ img, title: nome, sub: ano, text: full }) };
+    const projAll = this.projMeta.map((m) => {
+      const img = U(m.imgId);
+      const categoria = d.catLabels[this.catKeys.indexOf(m.catKey)];
+      return { ...m, nome: m.cliente, desc: m.designacao, categoria, img,
+        onOpen: () => this.openDetail({
+          img, title: m.cliente, sub: `${categoria} · ${m.ano}`, text: m.designacao,
+          hasMeta: true, clientFull: m.clienteFull, local: m.local, categoria
+        }) };
     });
     const projetos = this.state.filter === 'all' ? projAll : projAll.filter(p => p.catKey === this.state.filter);
     const SV = ['photo-1431620828042-54af7f3a9e28','photo-1648487241125-2d7615f05778','photo-1689011615152-19262401b4bf','photo-1734279135113-8bd58bc02b69','photo-1740968786460-e4cd129f98f1'];
@@ -1022,7 +964,6 @@ class Component extends DCLogic {
       return { ...s, img, full, onOpen: () => this.openDetail({ img, title: s.nome, sub: '', text: full }) };
     });
     const equipe = this.teamMeta.map((m, i) => ({ ...m, cargo: d.teamRole[i], especialidade: d.teamSpec[i], bio: d.teamBio[i], img: U(m.photoId), cardClass: this.state.teamOpen === i ? 'is-open' : '', onToggle: () => this.toggleTeam(i) }));
-    const faq = d.faq.map((x, i) => ({ ...x, openCls: this.state.faqOpen === i ? 'open' : '', onToggle: () => this.toggleFaq(i) }));
 
     const f = this.state.form, er = this.state.errors;
 
@@ -1054,7 +995,6 @@ class Component extends DCLogic {
       filtros,
       projetos,
       timeline: d.time,
-      faq,
       clientesLoop: [...this.clientesData, ...this.clientesData],
       depoimentos: d.depo.map((x, i) => ({ ...x, foto: this.depoFotos[i] })),
       equipe,
@@ -1090,47 +1030,6 @@ class Component extends DCLogic {
 }
 </script>
 
-<!-- ===================== EFEITO DE FUMAÇA NO CURSOR ===================== -->
-<script>
-(function(){
-  var mq = window.matchMedia;
-  if (mq && (mq('(prefers-reduced-motion: reduce)').matches || !mq('(pointer:fine)').matches)) return;
-  var canvas = document.createElement('canvas');
-  canvas.setAttribute('aria-hidden','true');
-  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
-  document.body.appendChild(canvas);
-  var ctx = canvas.getContext('2d');
-  var DPR = Math.min(window.devicePixelRatio || 1, 2);
-  function resize(){ canvas.width = innerWidth*DPR; canvas.height = innerHeight*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
-  resize(); addEventListener('resize', resize, {passive:true});
-  var parts = [], lastX = 0, lastY = 0, lastT = 0;
-  function spawn(x,y){
-    parts.push({ x:x+(Math.random()*10-5), y:y+(Math.random()*10-5), r:6+Math.random()*6,
-      vx:(Math.random()*0.6-0.3), vy:-(0.4+Math.random()*0.7), life:0,
-      max:45+Math.random()*30, o:0.26+Math.random()*0.16 });
-    if (parts.length > 140) parts.shift();
-  }
-  addEventListener('mousemove', function(e){
-    var now = performance.now(), dx = e.clientX-lastX, dy = e.clientY-lastY;
-    if (dx*dx+dy*dy > 16 || now-lastT > 45){ spawn(e.clientX, e.clientY); lastX=e.clientX; lastY=e.clientY; lastT=now; }
-  }, {passive:true});
-  function frame(){
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    for (var i=parts.length-1; i>=0; i--){
-      var p = parts[i]; p.life++;
-      if (p.life >= p.max){ parts.splice(i,1); continue; }
-      var k = p.life/p.max;
-      p.x += p.vx; p.y += p.vy; p.vy -= 0.004; p.vx *= 0.99;
-      var rad = p.r*(1+k*2.4), alpha = p.o*(1-k);
-      var g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,rad);
-      g.addColorStop(0,'rgba(228,231,235,'+alpha+')');
-      g.addColorStop(1,'rgba(228,231,235,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x,p.y,rad,0,6.283); ctx.fill();
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-</script>
+<script src="./efeitos.js" defer></script>
 </body>
 </html>
