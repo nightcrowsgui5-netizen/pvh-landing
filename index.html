@@ -81,7 +81,7 @@
   .team-card{position:relative;border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(15,53,61,.08);transition:transform .4s ease,box-shadow .4s ease;}
   .team-card:hover{transform:translateY(-10px);box-shadow:0 28px 54px rgba(15,53,61,.20);}
   .team-imgwrap{position:relative;aspect-ratio:1/1.08;overflow:hidden;}
-  .team-imgwrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+  .team-imgwrap img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .6s ease;}
   .team-card:hover .team-imgwrap img{transform:scale(1.06);}
   .team-social{position:absolute;top:0;left:0;display:flex;flex-direction:column;transform:translateX(-110%);transition:transform .35s ease;z-index:2;}
   .team-social a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;color:#fff;background:#243676;transition:background .25s;}
@@ -101,6 +101,9 @@
   .serv-ov{position:absolute;inset:0;background:rgba(36,54,118,.88);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;opacity:0;transition:opacity .35s ease;pointer-events:none;}
   .serv-ov p{font-size:13.5px;line-height:1.6;}
   .serv-card:hover .serv-ov{opacity:1;}
+  .proj-ov{position:absolute;inset:0;background:rgba(36,54,118,.9);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:1;}
+  .proj-ov p{font-size:14px;line-height:1.6;}
+  .proj-imgwrap:hover .proj-ov{opacity:1;}
   /* ===================== PROJETOS (cartao) ===================== */
   .proj-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 </style>
@@ -289,8 +292,9 @@
             <img src="{{ sv.img }}" alt="{{ sv.nome }}" onClick="{{ sv.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;">
             <div class="serv-ov"><p>{{ sv.desc }}</p></div>
           </div>
-          <div style="padding:20px 22px;">
-            <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;text-align:center;">{{ sv.nome }}</h3>
+          <div style="padding:20px 22px;text-align:center;">
+            <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#14454f;">{{ sv.nome }}</h3>
+            <a onClick="{{ sv.onOpen }}" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.06em;color:#14454f;text-transform:uppercase;cursor:pointer;" style-hover="color:#b08d4c;">{{ t.servLink }} <span style="font-size:14px;">→</span></a>
           </div>
         </div>
       </sc-for>
@@ -315,17 +319,17 @@
     <div class="rcol-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;">
       <sc-for list="{{ projetos }}" as="p" hint-placeholder-count="9">
         <div style="background:#fff;border:1px solid #e4e8e9;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(15,53,61,.14);">
-          <div style="position:relative;aspect-ratio:16/11;overflow:hidden;">
+          <div class="proj-imgwrap" style="position:relative;aspect-ratio:16/11;overflow:hidden;">
             <img src="{{ p.img }}" alt="{{ p.nome }}" onClick="{{ p.onOpen }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;cursor:pointer;" style-hover="transform:scale(1.05);">
-            <span style="position:absolute;top:14px;left:14px;background:rgba(20,69,79,.92);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:2px;">{{ p.categoria }}</span>
+            <span style="position:absolute;top:14px;left:14px;z-index:2;background:rgba(20,69,79,.92);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:2px;">{{ p.categoria }}</span>
+            <div class="proj-ov"><p>{{ p.desc }}</p></div>
           </div>
           <div style="padding:26px;display:flex;flex-direction:column;flex:1;">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
               <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#14454f;">{{ p.nome }}</h3>
               <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#b08d4c;white-space:nowrap;">{{ p.ano }}</span>
             </div>
-            <p class="proj-desc" style="font-size:13.5px;line-height:1.6;color:#5a6167;margin-top:10px;">{{ p.desc }}</p>
-            <div style="display:flex;align-items:center;gap:7px;margin-top:14px;font-size:12.5px;letter-spacing:.03em;color:#14454f;">
+            <div style="display:flex;align-items:center;gap:7px;margin-top:12px;font-size:12.5px;letter-spacing:.03em;color:#14454f;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:0 0 auto;"><path d="M12 21.5s7-6.6 7-11.5a7 7 0 1 0-14 0c0 4.9 7 11.5 7 11.5z" stroke="#b08d4c" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="#b08d4c" stroke-width="1.8"/></svg>
               {{ p.local }}
             </div>
@@ -346,9 +350,8 @@
   <div style="position:relative;width:100%;">
     <div style="display:flex;width:max-content;animation:marquee 34s linear infinite;">
       <sc-for list="{{ clientesLoop }}" as="c" hint-placeholder-count="16">
-        <div style="width:210px;height:88px;margin:0 14px;flex-shrink:0;border:1px solid #e8ebec;border-radius:3px;display:flex;align-items:center;gap:14px;padding:0 18px;filter:grayscale(0);opacity:1;">
-          <img src="{{ c.thumb }}" alt="{{ c.nome }}" loading="lazy" decoding="async" style="width:46px;height:46px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block;">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#14454f;">{{ c.nome }}</span>
+        <div style="height:88px;margin:0 30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <img src="{{ c.logo }}" alt="{{ c.nome }}" title="{{ c.nome }}" loading="lazy" decoding="async" style="max-height:54px;width:auto;max-width:185px;object-fit:contain;display:block;">
         </div>
       </sc-for>
     </div>
@@ -496,6 +499,17 @@
   </div>
 </footer>
 
+<!-- ===================== MODAL GALERIA (projeto com fotos) ===================== -->
+<sc-if value="{{ galleryOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeGallery }}" style="position:fixed;inset:0;z-index:120;background:rgba(8,20,24,.9);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .3s ease both;">
+    <button onClick="{{ closeGallery }}" aria-label="Fechar" style="position:absolute;top:16px;right:22px;background:none;border:none;color:#fff;font-size:38px;line-height:1;cursor:pointer;z-index:2;">&times;</button>
+    <button onClick="{{ galPrev }}" aria-label="Anterior" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:30px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">&lsaquo;</button>
+    <img onClick="{{ stop }}" src="{{ galleryImg }}" alt="Repsol-Sines" style="max-width:88vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.5);display:block;">
+    <button onClick="{{ galNext }}" aria-label="Seguinte" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:30px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">&rsaquo;</button>
+    <div style="position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;letter-spacing:.05em;background:rgba(0,0,0,.35);padding:6px 14px;border-radius:20px;">{{ galleryCount }}</div>
+  </div>
+</sc-if>
+
 <!-- ===================== MODAL DETALHE (projeto/serviço) ===================== -->
 <sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:110;background:rgba(8,20,24,.62);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .3s ease both;">
@@ -576,6 +590,8 @@ class Component extends DCLogic {
     factsIn: false,
     modalOpen: false,
     detail: null,
+    gallery: null,
+    galIdx: 0,
     teamOpen: -1,
     submitted: false,
     dial: '+351',
@@ -586,14 +602,19 @@ class Component extends DCLogic {
   factVals = [109, 485, 789, 890];
 
   clientesData = [
-    { nome:'FERROSUL',   thumb:'imagens/photo-1431620828042-54af7f3a9e28.jpg' },
-    { nome:'VIACARGO',   thumb:'imagens/photo-1648487241125-2d7615f05778.jpg' },
-    { nome:'RUMO LOG',   thumb:'imagens/photo-1689011615152-19262401b4bf.jpg' },
-    { nome:'TRANSVIA',   thumb:'imagens/photo-1734279135113-8bd58bc02b69.jpg' },
-    { nome:'METROBRÁS',  thumb:'imagens/photo-1740968786460-e4cd129f98f1.jpg' },
-    { nome:'PORTOVIA',   thumb:'imagens/photo-1689011615152-19262401b4bf.jpg' },
-    { nome:'CARGONORTE', thumb:'imagens/photo-1734279135113-8bd58bc02b69.jpg' },
-    { nome:'INFRARAIL',  thumb:'imagens/photo-1431620828042-54af7f3a9e28.jpg' }
+    { nome:'Infraestruturas de Portugal', logo:'imagens/clientes/ip.png' },
+    { nome:'AVAN Norte',        logo:'imagens/clientes/avan-norte.png' },
+    { nome:'COMSA',             logo:'imagens/clientes/comsa.png' },
+    { nome:'Sacyr Neopul',      logo:'imagens/clientes/sacyr-neopul.png' },
+    { nome:'Somafel',           logo:'imagens/clientes/somafel.png' },
+    { nome:'Repsol',            logo:'imagens/clientes/repsol.png' },
+    { nome:'Quadrante',         logo:'imagens/clientes/quadrante.png' },
+    { nome:'Betar Engenharia',  logo:'imagens/clientes/betar.png' },
+    { nome:'Tecnofisil',        logo:'imagens/clientes/tecnofisil.png' },
+    { nome:'ADRVT / PNRVT',     logo:'imagens/clientes/adrvt.png' },
+    { nome:'Porto de Aveiro',   logo:'imagens/clientes/porto-aveiro.png' },
+    { nome:'VW AutoEuropa',     logo:'imagens/clientes/vw-autoeuropa.png' },
+    { nome:'ISEL',              logo:'imagens/clientes/isel.png' }
   ];
 
   depoFotos = ['imagens/depo-carlos.jpg','imagens/depo-renata.jpg','imagens/depo-eduardo.jpg'];
@@ -634,7 +655,8 @@ class Component extends DCLogic {
       imgId:'photo-1740968786460-e4cd129f98f1' },
     { cliente:'Repsol-Sines', clienteFull:'', ano:'2023', catKey:'projfisc', local:'Portugal',
       designacao:'Terminal ferroviário CIS e infraestruturas complementares — trabalhos complementares à engenharia de detalhe.',
-      imgId:'photo-1431620828042-54af7f3a9e28' },
+      imgId:'photo-1431620828042-54af7f3a9e28',
+      gallery:['imagens/empresas/repsol-1.jpg','imagens/empresas/repsol-2.jpg','imagens/empresas/repsol-3.jpg'] },
     { cliente:'IP', clienteFull:'Infraestruturas de Portugal, SA', ano:'2024', catKey:'consultadoria', local:'Portugal',
       designacao:'Assessoria técnica para apoio da especialidade via-férrea.',
       imgId:'photo-1648487241125-2d7615f05778' },
@@ -653,14 +675,11 @@ class Component extends DCLogic {
   ];
 
   teamMeta = [
-    { nome:'Eng. António Braga', photoId:'photo-1507003211169-0a1dd7228f2d' },
-    { nome:'Eng. Paulo Ferreira', photoId:'photo-1500648767791-00dcc994a43e' },
-    { nome:'Eng.ª Juliana Reis', photoId:'photo-1544005313-94ddf0286df2' },
-    { nome:'Eng.ª Marina Costa', photoId:'team-x2' },
-    { nome:'Eng. Ricardo Lopes', photoId:'team-x1' },
-    { nome:'Eng.ª Sofia Martins', photoId:'team-x4' },
-    { nome:'Eng. Tiago Nunes', photoId:'team-x3' },
-    { nome:'Eng. Bruno Alves', photoId:'team-x5' }
+    { nome:'Eng. António Braga', photoId:'func-1' },
+    { nome:'Eng. Paulo Ferreira', photoId:'func-3' },
+    { nome:'Eng.ª Juliana Reis', photoId:'func-2' },
+    { nome:'Eng.ª Marina Costa', photoId:'func-4' },
+    { nome:'Eng. Ricardo Lopes', photoId:'func-5' }
   ];
 
   i18n = {
@@ -919,6 +938,9 @@ class Component extends DCLogic {
   setFilter(f) { this.setState({ filter: f }); }
   openModal() { this.setState({ modalOpen: true, submitted: false }); }
   closeModal() { this.setState({ modalOpen: false }); }
+  openGallery(imgs) { this.setState({ gallery: imgs, galIdx: 0 }); }
+  closeGallery() { this.setState({ gallery: null }); }
+  galNav(dir) { this.setState(s => { if (!s.gallery) return null; const n = s.gallery.length; return { galIdx: (s.galIdx + dir + n) % n }; }); }
   openDetail(d) { this.setState({ detail: d }); }
   closeDetail() { this.setState({ detail: null }); }
   field(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v }, errors: { ...s.errors, [k]: undefined } })); }
@@ -952,7 +974,7 @@ class Component extends DCLogic {
       const img = U(m.imgId);
       const categoria = d.catLabels[this.catKeys.indexOf(m.catKey)];
       return { ...m, nome: m.cliente, desc: m.designacao, categoria, img,
-        onOpen: () => this.openDetail({
+        onOpen: () => m.gallery ? this.openGallery(m.gallery) : this.openDetail({
           img, title: m.cliente, sub: `${categoria} · ${m.ano}`, text: m.designacao,
           hasMeta: true, clientFull: m.clienteFull, local: m.local, categoria
         }) };
@@ -987,6 +1009,12 @@ class Component extends DCLogic {
       detail: this.state.detail,
       detailOpen: !!this.state.detail,
       openDetail: (dt) => this.openDetail(dt),
+      galleryOpen: !!this.state.gallery,
+      galleryImg: this.state.gallery ? this.state.gallery[this.state.galIdx] : '',
+      galleryCount: this.state.gallery ? (this.state.galIdx + 1) + '/' + this.state.gallery.length : '',
+      galPrev: (e) => { if (e) e.stopPropagation(); this.galNav(-1); },
+      galNext: (e) => { if (e) e.stopPropagation(); this.galNav(1); },
+      closeGallery: () => this.closeGallery(),
       closeDetail: () => this.closeDetail(),
       teamPrev: () => this.teamScroll(-1),
       teamNext: () => this.teamScroll(1),
